@@ -1,0 +1,200 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ photographer.meta_title }}{% endblock %}
+{% block meta_description %}{{ photographer.meta_description }}{% endblock %}
+{% block meta_keywords %}{{ photographer.meta_keywords }}{% endblock %}
+{% block meta_author %}{{ photographer.name }}{% endblock %}
+{% block og_title %}{{ photographer.meta_title }}{% endblock %}
+{% block og_description %}{{ photographer.meta_description }}{% endblock %}
+{% block og_image %}{{ photographer.bigger_image.url }}{% endblock %}
+{% block twitter_title %}{{ photographer.meta_title }}{% endblock %}
+{% block twitter_description %}{{ photographer.meta_description }}{% endblock %}
+{% block twitter_image %}{{ photographer.bigger_image.url }}{% endblock %}
+{% block canonical_url %}{{ request.build_absolute_uri }}{% endblock %}
+{% block style %}{% static 'css/tour.css' %}{% endblock %}
+{% block moreStyles %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+{% endblock %}
+
+{% block content %}
+<main>
+    <section class="hero" style="background-image: url('{{ photographer.bigger_image.url }}');">
+        <div class="container">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h1>{{ photographer.name }}</h1>
+                    <div class="info-box">
+                        <div class="info-item">
+                          <i class="fas fa-map-marker-alt"></i> Departure: {{ photographer.departure_city }}
+                        </div>
+                        <div class="info-item">
+                          <i class="fas fa-flag"></i> End Point: {{ photographer.end_city }}
+                        </div>
+                    </div>
+                    <a class="contactbtn" href="#">
+                        <div>
+                            <button class="btn"><i class="animation"></i>Request Tour<i class="animation"></i></button>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="tourDetails">
+        <div class="container">
+            <div class="tour-container">
+                <div class="tour-content">
+                    <div class="tour-section">
+                        <h2>Explore This Photography Tour</h2>
+                        <div class="tab-menu">
+                            <button class="tab-button active" onclick="showContent('overview')">Overview</button>
+                            <button class="tab-button" onclick="showContent('details')">Details</button>
+                            <button class="tab-button" onclick="showContent('photography')">Photography Tips</button>
+                            <button class="tab-button" onclick="showContent('equipment')">Recommended Equipment</button>
+                        </div>
+            
+                        <!-- Overview Tab -->
+                        <div class="tab-content" id="overview">
+                            <h3 class="TourtitleInfo">Tour Description</h3>
+                            <p class="description">{{ photographer.description }}</p>
+                            
+                            <h3 class="TourtitleInfo">Highlights</h3>
+                            <ul class="highlights">
+                                {% for highlight in photographer.get_highlights_list %}
+                                    <li><i class="fa-regular fa-star"></i> {{ highlight }}</li>
+                                {% endfor %}
+                            </ul>
+                            
+                            <h3 class="TourtitleInfo">Included</h3>
+                            <ul class="included">
+                                {% for item in photographer.get_included_list %}
+                                    <li><i class="fa-regular fa-circle-check"></i> {{ item }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+            
+                        <!-- Details Tab (Dynamic Days) -->
+                        <div class="tab-content" id="details" style="display: none;">
+                            {% for day in photographer.days.all %}
+                            <div class="day-detail">
+                                <h3 class="TourtitleInfo">Day {{ day.day_number }}: {{ day.title }}</h3>
+                                <p>{{ day.description }}</p>
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                        <!-- Photography Tips Tab -->
+                        <div class="tab-content" id="photography" style="display: none;">
+                            <h3 class="TourtitleInfo">Photography Tips</h3>
+                            <ul class="photography-tips">
+                                {% for tip in photographer.get_photography_tips_list %}
+                                    <li><i class="fa fa-camera-retro"></i> {{ tip }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                        <!-- Recommended Equipment Tab -->
+                        <div class="tab-content" id="equipment" style="display: none;">
+                            <h3 class="TourtitleInfo">Recommended Equipment</h3>
+                            <ul class="equipment-list">
+                                {% for equipment in photographer.get_recommended_equipment_list %}
+                                    <li><i class="fa fa-cog"></i> {{ equipment }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Gallery Section -->
+                    <div class="swiper-container">
+                        <div class="swiper-pagination"></div>
+                        <div class="swiper-wrapper">
+                            {% for image in photographer.gallery_images.all %}
+                                <div class="swiper-slide">
+                                    <img src="{{ image.image.url }}" alt="{{ image.alt_text }}">
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- Sidebar with Info -->
+                <div class="tour-sidebar">
+                    <div class="brief-info">
+                        <div class="briefly"><h3>Briefly</h3></div>
+                        <ul>
+                            <li><i class="fa-regular fa-clock"></i> Duration: {{ photographer.duration_days }} Days</li>
+                            <li><i class="fas fa-map-marker-alt"></i> Departure: {{ photographer.departure_city }}</li>
+                            <li><i class="fas fa-flag"></i> End Point: {{ photographer.end_city }}</li>
+                        </ul>
+                    </div>
+
+                    <!-- Booking Form -->
+                    <div class="booking-form">
+                        <div class="briefly"><h3>Book This Tour</h3></div>
+                        <form>
+                            <input type="text" name="name" placeholder="Name" required>
+                            <input type="email" name="email" placeholder="Email" required>
+                            <input type="text" name="phone" placeholder="Phone Number" required>
+                            <textarea name="message" placeholder="Message" required></textarea>
+                            <button type="submit">Send</button>
+                        </form>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="contact-card">
+                        <h4>Get a Question?</h4>
+                        <p>Do not hesitate to give us a call.</p>
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <i class="fa fa-envelope"></i>
+                                <a href="mailto:info@tours.com">info@tours.com</a>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fa fa-phone"></i>
+                                <a href="tel:+1234567890">+123 456 7890</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>                      
+        </div>
+    </section>
+</main>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function showContent(contentId) {
+        document.querySelectorAll('.tab-content').forEach(function(content) {
+            content.style.display = 'none';
+        });
+        document.querySelectorAll('.tab-button').forEach(function(button) {
+            button.classList.remove('active');
+        });
+    
+        document.getElementById(contentId).style.display = 'block';
+        event.currentTarget.classList.add('active');
+    }
+    
+    document.getElementById('overview').style.display = 'block';
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const swiper = new Swiper('.swiper-container', {
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ gallery_page.meta_title }}{% endblock %}
+{% block meta_description %}{{ gallery_page.meta_description }}{% endblock %}
+{% block meta_keywords %}{{ gallery_page.meta_keywords }}{% endblock %}
+{% block meta_author %}{{ gallery_page.meta_title }}{% endblock %}
+{% block og_title %}{{ gallery_page.meta_title }}{% endblock %}
+{% block og_description %}{{ gallery_page.meta_description }}{% endblock %}
+{% block og_image %}{{ gallery_page.hero_image.url }}{% endblock %}
+{% block twitter_title %}{{ gallery_page.meta_title }}{% endblock %}
+{% block twitter_description %}{{ gallery_page.meta_description }}{% endblock %}
+{% block twitter_image %}{{ gallery_page.hero_image.url }}{% endblock %}
+{% block canonical_url %}{{ request.build_absolute_uri }}{% endblock %}
+{% block style %}{% static 'css/gallery.css' %}{% endblock %}
+{% block moreStyles %}{% endblock %}
+
+{% block content %}
+
+<main>
+    <section class="hero" style="background-image: url('{{ gallery_page.hero_image.url }}');">
+        <div class="container">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h1>{{ gallery_page.hero_title }}</h1>
+                    <p>{{ gallery_page.hero_paragraph }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert {{ message.tags }}">
+            <i class="fa fa-check-circle"></i> {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+    </section>
+    <section>
+        <div class="container">
+            <div class="gallery-container">
+                <h2 class="title">{{ gallery_page.gallery_section_title }}</h2>
+                <div class="image-container">
+                    {% for image in gallery_page.images.all %}
+                        <img src="{{ image.image.url }}" alt="{{ image.alt_text }}" class="image" loading="lazy"/>
+                    {% empty %}
+                        <p>No images available at the moment.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(() => {
+            const messages = document.querySelector('.messages');
+            if (messages) {
+                messages.style.opacity = '0';
+                setTimeout(() => messages.remove(), 500); // Remove from DOM after fade-out
+            }
+        }, 6000);
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+        if ("IntersectionObserver" in window) {
+            let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        let lazyImage = entry.target;
+                        lazyImage.src = lazyImage.dataset.src;
+                        lazyImage.classList.remove("lazy");
+                        lazyImageObserver.unobserve(lazyImage);
+                    }
+                });
+            });
+
+            lazyImages.forEach(function(lazyImage) {
+                lazyImageObserver.observe(lazyImage);
+            });
+        } else {
+            let lazyLoad = function() {
+                lazyImages.forEach(function(lazyImage) {
+                    if (lazyImage.getBoundingClientRect().top < window.innerHeight && lazyImage.getBoundingClientRect().bottom > 0 && getComputedStyle(lazyImage).display !== "none") {
+                        lazyImage.src = lazyImage.dataset.src;
+                        lazyImage.classList.remove("lazy");
+                    }
+                });
+
+                if (lazyImages.length == 0) {
+                    document.removeEventListener("scroll", lazyLoad);
+                    window.removeEventListener("resize", lazyLoad);
+                    window.removeEventListener("orientationchange", lazyLoad);
+                }
+            };
+
+            document.addEventListener("scroll", lazyLoad);
+            window.addEventListener("resize", lazyLoad);
+            window.addEventListener("orientationchange", lazyLoad);
+        }
+    });
+</script>
+{% endblock %}

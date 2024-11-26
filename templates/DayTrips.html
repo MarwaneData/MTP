@@ -1,0 +1,237 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ day_trips_page.meta_title }}{% endblock %}
+{% block meta_description %}{{ day_trips_page.meta_description }}{% endblock %}
+{% block meta_keywords %}{{ day_trips_page.meta_keywords }}{% endblock %}
+{% block meta_author %}Discover Morocco Tours{% endblock %}
+{% block og_title %}{{ day_trips_page.meta_title }}{% endblock %}
+{% block og_description %}{{ day_trips_page.meta_description }}{% endblock %}
+{% block twitter_title %}{{day_trips_page.meta_title}}{% endblock %}
+{% block twitter_description %}{{day_trips_page.meta_description}}{% endblock %}
+{% block twitter_image %}{{day_trips_page.hero_image.url}}{% endblock %}
+{% block canonical_url %}{{ request.build_absolute_uri }}{% endblock %}
+
+{% block style %}{% static 'css/dayTrips.css' %}{% endblock %}
+{% block seometa %}
+<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TouristAttraction",
+      "name": "{{ day_trips_page.meta_title }}",
+      "description": "{{ day_trips_page.meta_description }}",
+      "image": "{{ request.scheme }}://{{ request.get_host }}{{ day_trips_page.hero_image.url }}",
+      "touristType": "Adventure Travel",
+      "location": {
+        "@type": "Place",
+        "name": "Morocco",
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 31.7917,
+          "longitude": -7.0926
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "{{contact_info.location}}",
+          "addressCountry": "MA"
+        }
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Best Day Trips in Morocco",
+        "itemListElement": [
+          {% for daytrip in best_daytrips %}
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Tour",
+              "name": "{{ daytrip.name }}",
+              "description": "{{ daytrip.description|truncatewords:20 }}",
+              "touristType": "Adventure Travel",
+              "image": "{{ request.scheme }}://{{ request.get_host }}{{ daytrip.small_image.url }}",
+              "offers": {
+                "@type": "Offer",
+                "price": "{{ daytrip.price }}",
+                "priceCurrency": "USD",
+                "url": "{{ request.scheme }}://{{ request.get_host }}{% url 'daytrip-detail' daytrip.slug %}"
+              }
+            }
+          }{% if not forloop.last %},{% endif %}
+          {% endfor %}
+        ]
+      },
+      "potentialAction": {
+        "@type": "ReserveAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "{{ request.build_absolute_uri }}#contact",
+          "inLanguage": "en",
+          "actionPlatform": [
+            "http://schema.org/DesktopWebPlatform",
+            "http://schema.org/MobileWebPlatform"
+          ]
+        },
+        "result": {
+          "@type": "TouristAttraction",
+          "name": "Book a Day Trip"
+        }
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+{{ contact_info.phone_number }}",
+        "contactType": "Customer Service",
+        "areaServed": "MA",
+        "availableLanguage": ["English", "French", "Arabic"]
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "{{ request.scheme }}://{{ request.get_host }}{% url 'index' %}"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Morocco Tours",
+              "item": "{{ request.scheme }}://{{ request.get_host }}{% url 'morocco-tours' %}"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Day Trips",
+              "item": "{{ request.scheme }}://{{ request.get_host }}{% url 'day-trips' %}"
+            }
+          ]
+        }
+        </script>           
+{% endblock %}
+{% block moreStyles %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+<link rel="stylesheet" href="{% static 'css/textImage.css' %}" />
+<link rel="stylesheet" href="{% static 'css/swipper.css' %}" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+{% endblock %}
+
+{% block content %}
+<main>
+    <section class="hero" style="background-image: url({{ day_trips_page.hero_image.url }});">
+        <div class="container">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h1>{{ day_trips_page.hero_title }}</h1>
+                    <p>{{ day_trips_page.hero_paragraph }}</p>
+                    {% if day_trips_page.display_hero_button %}
+                    <a class="contactbtn" href="#">
+                        <div>
+                            <button class="btn"><i class="animation"></i>{{ day_trips_page.hero_button_text }}<i class="animation"></i></button>
+                        </div>
+                    </a>
+                    {% endif %}
+                </div>
+                <div class="services">
+                    <div class="service-item">
+                        <img src="{{ day_trips_page.service_image1.url }}" alt="{{ day_trips_page.service_title1 }}">
+                        <p>{{ day_trips_page.service_title1 }}</p>
+                    </div>
+                    <div class="service-item">
+                        <img src="{{ day_trips_page.service_image2.url }}" alt="{{ day_trips_page.service_title2 }}">
+                        <p>{{ day_trips_page.service_title2 }}</p>
+                    </div>
+                    <div class="service-item">
+                        <img src="{{ day_trips_page.service_image3.url }}" alt="{{ day_trips_page.service_title3 }}">
+                        <p>{{ day_trips_page.service_title3 }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% if day_trips_page.show_best_day_trips_section %}
+    <section class="privateTour">
+        <div class="container">
+            <h2 class="title">{{ day_trips_page.best_day_trips_title }}</h2>
+            <div class="container swiper">
+                <div class="slider-wrapper">
+                    <div class="Tour-list swiper-wrapper">
+                        {% for daytrip in best_daytrips %}
+                        <a href="{% url 'daytrip-detail' daytrip.slug %}" class="tour-card swiper-slide">
+                            <div class="imageTour">
+                                <img src="{{ daytrip.small_image.url }}" alt="{{ daytrip.name }}">
+                            </div>
+                            <div class="tourInfo">
+                                <h3>{{ daytrip.name }}</h3>
+                                <p class="description">{{ daytrip.description|truncatewords:20 }}</p>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-slide-button swiper-button-prev"></div>
+                    <div class="swiper-slide-button swiper-button-next"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    {% if day_trips_page.show_all_day_trips_section %}
+    <section class="MoroccoTours">
+        <div class="container">
+            <h2 class="title">{{ day_trips_page.all_day_trips_title }}</h2>
+            <div class="tours">
+                {% for daytrip in daytrips %}
+                <a href="{% url 'daytrip-detail' daytrip.slug %}" class="tour-card">
+                    <div class="imageTour">
+                        <img src="{{ daytrip.small_image.url }}" alt="{{ daytrip.name }}">
+                    </div>
+                    <div class="tourInfo">
+                        <h3>{{ daytrip.name }}</h3>
+                        <p class="description">{{ daytrip.description|truncatewords:20 }}</p>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    {% if day_trips_page.show_blog_section %}
+    <section class="textImageFlex">
+        <div class="container">
+            <div class="full">
+                <div class="textContent">
+                    <h2 class="title">{{ day_trips_page.blog_title }}</h2>
+                    <p class="text">{{ day_trips_page.blog_paragraph }}</p>
+                </div>
+                <div class="image">
+                    <img src="{{ day_trips_page.blog_image.url }}" alt="Blog Image">
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    {% if day_trips_page.show_unique_experiences_section %}
+    <section class="textImageFlex">
+        <div class="container">
+            <div class="full full-reverse">
+                <div class="textContent">
+                    <h2 class="title">{{ day_trips_page.unique_experiences_title }}</h2>
+                    <p class="text">{{ day_trips_page.unique_experiences_paragraph }}</p>
+                </div>
+                <div class="image">
+                    <img src="{{ day_trips_page.unique_experiences_image.url }}" alt="Unique Experiences Image">
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+</main>
+{% endblock %}

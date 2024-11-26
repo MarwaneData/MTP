@@ -1,0 +1,320 @@
+.hero h1{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 34px;
+    margin-bottom: 25px;
+}
+.hero{
+    width: 100%;
+    height: 75vh;
+    background:no-repeat center center/cover;
+    text-align: center;
+    color: #FFFFFF;
+    margin: 0 0 40px 0;
+    position: relative;
+}
+.hero p{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    margin: 0 0 25px 0;
+}
+.hero-section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 70vh;
+}
+.hero .btn{
+    min-width: 130px;
+}
+.arrow-container {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.arrow {
+    animation: moveDown 1.5s infinite;
+}
+.arrow:nth-child(2) {
+    animation-delay: 0s;
+}
+.privateTour{
+    padding: 40px 0;
+    background: linear-gradient(180deg, #FFFFFF 7.47%, #FDFBF9 58.55%, #FFFFFF 100%);
+}
+.services{
+    position: absolute;
+    bottom: -6vh;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    width: 730px;
+    box-shadow: 3px 4px 7px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    padding: 12px 30px;
+    max-height: 90px;
+}
+
+.services .service-item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.services .service-item img{
+    height: 28px;
+    margin-bottom: 10px;
+}
+.services .service-item p{
+    font-size: 12px;
+    font-weight: 600;
+    color: black;
+    margin: 0;
+}
+
+.MoroccoTours{
+    padding: 50px 0 ;
+}
+.tours {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, auto));
+    gap: 40px; 
+    padding: 20px 80px;
+}
+a{
+    color: #000000;
+}
+.tour-card {
+    min-height: auto;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 1px 1px 7px 5px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    background-color: white;
+}
+.imageTour {
+    width: 100%;
+    height: 200px;
+    background-image: url('images/tourimage.png');
+    background-size: cover;
+    background-position: center;
+    border-radius: 0  0 10px 10px  ;
+}
+.imageTour img{
+    width: 100%;
+    height: -webkit-fill-available;
+    border-radius: 0  0 10px 10px  ;
+}
+.tourInfo {
+    padding: 15px;
+}
+.tourInfo h3 {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: black;
+}
+
+.days{
+    font-size: 16px;
+    color: #303030;
+}
+.days i{
+    margin: 0 5px 14px 0;
+}
+.description{
+    font-size: 14px;    
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+    color: #000000;
+    text-align: justify;
+}
+
+
+.tour-content p {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.tour-content button {
+    padding: 10px 20px;
+    background-color: #00aaff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.tour-content button:hover {
+    background-color: #008ecc;
+}
+.strengths{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 30px 0;
+}
+.strength-item {
+    position: relative;
+    height: 140px;
+    width: 140px;
+    padding: 10px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.strength-item::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: black;
+    opacity: 0.5;
+}
+.strength-item h5 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    z-index: 10;
+    color: #fff; /* Adjust this color depending on your design */
+}
+
+.strength-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
+@keyframes moveDown {
+    0% {
+        transform: translateY(0);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1.1) translateY(10px);
+        opacity: 0.75;
+    }
+    100% {
+        transform: scale(1)  translateY(0);
+        opacity: 0.5;
+    }
+}
+@media screen and (max-width: 1024px){
+    .tours {
+        gap: 0;
+        padding: 20px 30px;
+        align-items: center;
+        justify-content: space-evenly;
+        gap: 40px 0;
+    }
+    .strengths{
+        flex-wrap: wrap;
+    }
+    .strength-item {
+        position: relative;
+        height: 100px;
+        width: 100px;
+        padding: 5px;
+    }
+}
+    
+@media screen and (max-width: 740px){
+    .tours {
+        gap: 40px; 
+        padding: 20px 30px;
+    }
+    .tour-card{
+        max-width: 340px;
+        margin: 0 auto;
+    }
+    
+}
+
+@media screen and (max-width: 700px){
+    .hero{
+        height: 75vh;
+        min-height: 500px;
+    }
+    .hero h1 {
+        font-size: 22px;
+        line-height: 38px;
+        margin: 0 0 15px 0;
+    }
+    .hero p {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        margin: 0 auto 20px;
+        max-width: 300px;
+    }
+    .services{
+        width: 90%;
+        padding: 12px 10px;
+        max-height: 120px;
+    }
+    .services .service-item img{
+        height: 22px;
+        margin-bottom: 10px;
+    }
+    .services .service-item p{
+        font-size: 9px;
+        width: 90px;
+        margin: 0;
+    }
+    
+}
+
+@media screen and (max-width: 500px){
+    .tours {
+        gap: 25px 0; 
+        padding: 20px 0;
+    }
+    .tour-card{
+        max-width: 340px;
+        margin: 0 auto;
+    }
+    .strengths{
+        flex-wrap: wrap;
+        gap:  0 20px;
+        margin: 30px 0;
+
+    }
+    .strength-item {
+        position: relative;
+        height: 90px;
+        width: 90px;
+        padding: 10px;
+
+    }
+    .strength-item H5{
+        font-size: 12px;
+        font-weight: 400;
+    }
+    
+
+}
+

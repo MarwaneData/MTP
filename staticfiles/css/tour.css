@@ -1,0 +1,458 @@
+.hero h1{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 34px;
+    line-height: 66px;
+}
+.hero{
+    width: 100%;
+    height: 89vh;
+    background: no-repeat center center/cover;
+    text-align: center;
+    color: #FFFFFF;
+    min-height: 672;
+    margin: 0 0 40px 0;
+    position: relative;
+}
+.hero p{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 66px;
+}
+.hero-section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 70vh;
+}
+
+.info-box {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  
+.info-item {
+    margin: 0 15px;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+.info-item i {
+    margin-right: 10px;
+    color: black;
+    background: white;
+    padding: 10px 12px;
+    border-radius: 50%;
+}
+.info-item:nth-of-type(2) i  {
+    padding: 10px; 
+  }
+.details-button {
+    background-color: #6FCF97;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+.details-button:hover {
+    background-color: #57b97a;
+}
+.hero .btn{
+    min-width: 130px;
+}
+.tour-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 0 30px;
+}
+.tour-content {
+    width: fit-content;
+}
+.tour-content .description{
+    margin-bottom: 30px;
+}
+.tour-sidebar {
+    width: fit-content;
+    min-width: 340px;
+    border-radius: 8px 8px 0 0;
+}
+.TourtitleInfo{
+    font-size: 16px;
+    font-weight: 600;
+}
+.tour-section {
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius:10px ;
+}
+
+.tab-menu {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+.tab-button {
+    background-color: transparent;
+    border: none;
+    padding: 6px 0;
+    margin: 0 60px 0 0;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    color: #646464;
+}
+.tab-button.active {
+    border-bottom: 2px solid #000;
+    color: black;
+}
+.tab-content {
+    display: none;
+    margin: 20px 0 0 0;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+h2 {
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+p {
+    margin: 10px 0;
+    text-align: justify;
+}
+
+.tourDetails ul {
+    list-style: none;
+    padding: 20px 30px;
+}
+
+.tourDetails ul li {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.tourDetails ul li i {
+    color: #44B5A4;
+    width: 20px;
+    margin-right: 14px;
+}
+.wayInformations {
+    margin: 10px 10px 20px;
+}
+.wayInformations i {
+    margin-right: 10px;
+}
+.brief-info ul li {
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+.nights {
+   margin: 30px 0 0 15px;
+}
+.brief-info{
+    margin: 0 0 40px 0;
+    background: url('../images/tourbriefly.png');
+    background-position: center;
+    background-size: cover;
+    
+}
+.booking-form  textarea{
+    resize: none;
+    height: 120px;    
+}
+.booking-form form {
+    display: flex;
+    flex-direction: column;
+    background: #fcfcfc;
+    padding: 30px 20px;
+}
+
+.booking-form input, .booking-form textarea {
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 0;
+    font-size: 15px;
+    background: #ffffff;
+}
+.booking-form button {
+    background-color: #000;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.booking-form button:hover {
+    background-color: #333;
+}
+.briefly{
+    border-radius: 8px 8pX 0 0;
+    width: 100%;
+    background: linear-gradient(45deg, #009688, #6cd4ca);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+}
+.briefly h3{
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+}
+i.fas.fa-circle {
+    font-size: 10px;
+}
+
+.contact-card {
+    background-color: #fcfcfc;
+    padding: 20px;
+    border-radius: 10px;
+    margin: auto;
+    margin: 30px 0;
+}
+.contact-card h4 {
+    margin-bottom: 10px;
+    font-weight: 400;
+    font-size: 15px;
+    color: #333;
+}
+
+.contact-card p {
+    margin-bottom: 20px;
+    color: #666;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #008080;
+}
+
+.contact-item i {
+    font-size: 14px;
+    color: white;
+    background: #2FA3A3;
+    padding: 8px;
+    border-radius: 50%;
+}
+
+.contact-item a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+}
+
+.contact-item a:hover {
+    color: #008080;
+}
+
+
+.swiper-container {
+    width: 100%;
+    margin: 30px 0 20px 0;
+    position: relative;
+    overflow: hidden;
+    cursor: grab;
+}
+.swiper-container:active {
+    cursor: grabbing;
+}
+.swiper-wrapper {
+    display: flex;
+    transition: transform 0.3s ease-out;
+}
+.swiper-slide {
+    flex-shrink: 0;
+    width: 100%;
+    height: 400px;
+    max-height: 420px;
+}
+.swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+.swiper-button-prev,
+.swiper-button-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    text-decoration: none;
+    font-size: 14;
+    padding: 10px;
+    transition: opacity 0.3s;
+    z-index: 10;
+}
+.swiper-button-prev {
+    left: 10px;
+}
+.swiper-button-next {
+    right: 10px;
+}
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+    opacity: 0.7;
+}
+.swiper-pagination {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    z-index: 10;
+}
+.swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    margin: 0 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+.swiper-pagination-bullet:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+.swiper-pagination-bullet.active {
+    background-color: white;
+    transform: scale(1.2);
+}
+
+
+
+
+/* Pricing Plans Section */
+.pricing-plans {
+    padding: 50px 0;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.pricing-plans .title {
+    font-size: 26px;
+    margin-bottom: 40px;
+    font-weight: 600;
+}
+
+.pricing-cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.pricing-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 20%;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.pricing-card:hover {
+    transform: translateY(-10px);
+}
+
+.pricing-card h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.pricing-card .price {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.pricing-card hr {
+    margin: 20px 0;
+}
+
+.pricing-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.pricing-card ul li {
+    margin: 10px 0;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.pricing-card ul li strong {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+@media screen and (max-width: 840px){
+    .tour-container{
+        flex-direction: column;
+    }
+    .tour-sidebar {
+        min-width: 430px;
+        margin: 0 auto;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 700px){
+    .hero h1 {
+        font-size: 22px;
+        line-height: 38px;
+        margin: 0 0 15px 0;
+    }
+    .hero p {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 32px;
+        margin: 0 auto 20px;
+        max-width: 300px;
+    }
+}
+
+@media screen and (max-width: 600px){
+    .info-box {
+        margin: 15px 0;
+        flex-direction: column;
+    }
+    .tour-sidebar {
+        min-width: fit-content;
+        margin: 0 auto;
+        width: 100%;
+    }
+}
+
+
+

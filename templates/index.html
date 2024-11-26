@@ -1,0 +1,463 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{homepage.meta_title}}{% endblock %}
+{% block meta_description %}{{homepage.meta_description}}{% endblock %}
+{% block meta_keywords %}{{homepage.meta_keywords}}{% endblock %}
+{% block meta_author %}Morocco Tours Photographers{% endblock %}
+{% block og_title %}{{homepage.meta_title}}{% endblock %}
+{% block og_description %}{{homepage.meta_description}}{% endblock %}
+{% block og_image %}{{homepage.hero_image}}{% endblock %}
+{% block twitter_title %}{{homepage.meta_title}}{% endblock %}
+{% block twitter_description %}{{homepage.meta_description}}{% endblock %}
+{% block twitter_image %}{{homepage.hero_image}}{% endblock %}
+{% block canonical_url %}{{ request.build_absolute_uri }}{% endblock %}
+{% block style %}{% static 'css/index.css' %}{% endblock %}
+{% block seometa %}
+<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TouristAttraction",
+      "name": "{{homepage.meta_title}}",
+      "description": "{{homepage.meta_description}}",
+      "image": "{{ request.scheme }}://{{ request.get_host }}{{ homepage.hero_image.url }}",
+      "touristType": "Adventure Travel",
+      "location": {
+        "@type": "Place",
+        "name": "Morocco",
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 31.7917,
+          "longitude": -7.0926
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "{{contact_info.location}}",
+          "addressCountry": "MA"
+        }
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Tour Packages",
+        "itemListElement": [
+          {% for tour in tours %}
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Tour",
+              "name": "{{ tour.name }}",
+              "description": "{{ tour.description }}",
+              "touristType": "Adventure Travel",
+              "duration": "P{{ tour.duration_days }}D",
+              "image": "{{ tour.small_image.url }}",
+              "offers": {
+                "@type": "Offer",
+                "price": "{{ tour.price }}",
+                "priceCurrency": "USD",
+                "url": "{{ request.build_absolute_uri }}{% url 'tour-detail' tour.slug %}"
+              }
+            }
+          }{% if not forloop.last %},{% endif %}
+          {% endfor %}
+        ]
+      },
+      "potentialAction": {
+        "@type": "ReserveAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "{{ request.build_absolute_uri }}#contact",
+          "inLanguage": "en",
+          "actionPlatform": [
+            "http://schema.org/DesktopWebPlatform",
+            "http://schema.org/MobileWebPlatform"
+          ]
+        },
+        "result": {
+          "@type": "TouristAttraction",
+          "name": "Book a Morocco Tour"
+        }
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+{{contact_info.phone_number}}",
+        "contactType": "Customer Service",
+        "areaServed": "MA",
+        "availableLanguage": "English, French, Arabic"
+      }
+    }
+    </script>  
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "{{ request.build_absolute_uri }}"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Morocco Desert Tours",
+              "item": "{{ request.build_absolute_uri }}{% url 'morocco-tours' %}"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Day Trips",
+              "item": "{{ request.build_absolute_uri }}{% url 'day-trips' %}"
+            },
+            {
+              "@type": "ListItem",
+              "position": 4,
+              "name": "Photography Tours",
+              "item": "{{ request.build_absolute_uri }}{% url 'PhotoGrapher-tours' %}"
+            },
+            {
+              "@type": "ListItem",
+              "position": 5,
+              "name": "Luxury Desert Camp",
+              "item": "{{ request.build_absolute_uri }}{% url 'DesertCamp' %}"
+            },
+            {
+              "@type": "ListItem",
+              "position": 6,
+              "name": "About",
+              "item": "{{ request.build_absolute_uri }}{% url 'about' %}"
+            },
+            {
+              "@type": "ListItem",
+              "position": 7,
+              "name": "Gallery",
+              "item": "{{ request.build_absolute_uri }}{% url 'gallery' %}"
+            },
+            {
+              "@type": "ListItem",
+              "position": 8,
+              "name": "Blog",
+              "item": "{{ request.build_absolute_uri }}{% url 'blogs' %}"
+            }
+          ]
+        }
+        </script>
+        <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {% for faq in faqs %}
+                {
+                  "@type": "Question",
+                  "name": "{{ faq.question }}",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "{{ faq.answer_title }} {% for item in faq.get_answer_items %} {{ item }}, {% endfor %}                    "
+                  }
+                }{% if not forloop.last %},{% endif %}
+                {% endfor %}
+              ]
+            }
+            </script>
+            <script type="application/ld+json">
+                {
+                  "@context": "https://schema.org",
+                  "@type": "Organization",
+                  "name": "Morocco Tours Photographer",
+                  "url": "{{ request.build_absolute_uri }}",
+                  "sameAs": [
+                    {% if contact_info.facebook_active and contact_info.facebook_url %}
+                    "{{ contact_info.facebook_url }}"{% if contact_info.instagram_active or contact_info.youtube_active or contact_info.twitter_active %},{% endif %}
+                    {% endif %}
+                    {% if contact_info.instagram_active and contact_info.instagram_url %}
+                    "{{ contact_info.instagram_url }}"{% if contact_info.youtube_active or contact_info.twitter_active %},{% endif %}
+                    {% endif %}
+                    {% if contact_info.youtube_active and contact_info.youtube_url %}
+                    "{{ contact_info.youtube_url }}"{% if contact_info.twitter_active %},{% endif %}
+                    {% endif %}
+                    {% if contact_info.twitter_active and contact_info.twitter_url %}
+                    "{{ contact_info.twitter_url }}"
+                    {% endif %}
+                  ]
+                }
+                </script>
+                    
+{% endblock %}
+{% block moreStyles %}
+<link rel="preload" href="{% static 'css/swipper.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+  <link rel="stylesheet" href="{% static 'css/swipper.css' %}">
+</noscript>
+<link rel="preload" href="{% static 'css/textImage.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+  <link rel="stylesheet" href="{% static 'css/textImage.css' %}">
+</noscript>
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+</noscript>
+{% endblock %}
+
+{% block content %}
+<main>
+    {% if homepage.hero_title and homepage.hero_paragraph %}
+    <section class="hero">
+        <picture class="hero-background">
+            <source media="(max-width: 767px)" srcset="{{ homepage.mobile_hero_image.url }}" />
+            <source media="(min-width: 1200px)" srcset="{{ homepage.hero_image.url }}" />
+            <img src="{{ homepage.hero_image.url }}" alt="{{ homepage.hero_title }}">
+        </picture>
+        <div class="container">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h1>{{ homepage.hero_title }}</h1>
+                    <p>{{ homepage.hero_paragraph }}</p>
+                    {% if homepage.display_hero_button %}
+                    <a class="contactbtn" href="#contact">
+                        <button class="btn"><i class="animation"></i>{{ homepage.hero_button_text }}<i class="animation"></i></button>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endif %}
+
+
+    <section class="textImageFlex">
+        <div class="container">
+            <div class="full">
+                <div class="textContent">
+                    <h2 class="title">{{homepage.about_title}}</h2>
+                    {% for p in homepage.get_about_list %}
+                    <p class="text">{{ p }}</p>
+                    {% endfor %}
+                </div>
+                <div class="image">
+                    <img src="{{homepage.about_image}}" alt="{{homepage.about_title}}">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% if homepage.show_tours_section %}
+    <section class="privateTour">
+        <div class="container">
+            <h2 class="title">{{homepage.tours_section_title}}</h2>
+            <div class="container swiper">
+                <div class="slider-wrapper">
+                    <div class="Tour-list swiper-wrapper">
+                        {% for tour in tours %}
+                        <a href="{% url 'tour-detail' tour.slug %}" class="tour-card swiper-slide">
+                            <div class="imageTour">
+                                <img src="{{ tour.small_image }}" alt="{{ tour.name }}">
+                            </div>
+                            <div class="tourInfo">
+                                <h3>{{ tour.name }}</h3>
+                                <p class="days"><i class="far fa-clock"></i> {{ tour.duration_days }} Days</p>
+                                <p class="description">{{ tour.description|truncatewords:25 }}</p>
+                            </div>
+                        </a>
+                        {% endfor %}
+                        
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-slide-button swiper-button-prev"></div>
+                    <div class="swiper-slide-button swiper-button-next"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    {% if homepage.show_excursions_section %}
+    <section class="privateTour">
+        <div class="container">
+            <h2 class="title">PRIVATE EXCURSIONS AND DAY TRIPS</h2>
+            <div class="container swiper">
+                <div class="slider-wrapper">
+                    <div class="Tour-list swiper-wrapper">
+                    {% for excursion in excursions %}
+                        <a href="{% url 'daytrip-detail' excursion.slug %}" class="tour-card swiper-slide">
+                            <div class="imageTour">
+                                <img src="{{ excursion.small_image }}" alt="{{ excursion.name }}">
+                            </div>
+                            <div class="tourInfo">
+                                <h3>{{ excursion.name }}</h3>
+                                <p class="days"><i class="far fa-clock"></i> {{ excursion.duration }} Days</p>
+                                <p class="description">{{ excursion.description|truncatewords:25 }}</p>
+                            </div>
+                        </a>
+                    {% endfor %}
+                    
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-slide-button swiper-button-prev"></div>
+                    <div class="swiper-slide-button swiper-button-next"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    <section class="why-choose-us">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="title">Why Choose Our Morocco Tours?</h2>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                        <div class="icon-bg"></div>
+                    </div>
+                    <span class="number" data-target="1000">{{ homepage.happy_travelers }}+</span>
+                    <h3>Happy Travelers</h3>
+                    <p>Creating unforgettable memories for our valued guests</p>
+                </div>
+    
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <div class="icon-bg"></div>
+                    </div>
+                    <span class="number" data-target="50">{{ homepage.destinations }}+</span>
+                    <h3>Destinations</h3>
+                    <p>Exploring Morocco's most beautiful locations</p>
+                </div>
+    
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-star"></i>
+                        <div class="icon-bg"></div>
+                    </div>
+                    <span class="number" data-target="10">{{ homepage.years_experience }}+</span>
+                    <h3>Years Experience</h3>
+                    <p>Dedicated to excellence in tourism</p>
+                </div>
+    
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-certificate"></i>
+                        <div class="icon-bg"></div>
+                    </div>
+                    <span class="number" data-target="100">{{ homepage.satisfaction_rate }}%</span>
+                    <h3>Satisfaction Rate</h3>
+                    <p>Committed to exceeding expectations</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="textImageFlex">
+        <div class="container">
+            <div class="full full-reverse">
+                <div class="textContent">
+                    <h2 class="title">{{homepage.comfort_title}}</h2>
+                    {% for p in homepage.get_about2_list %}
+                    <p class="text">{{ p }}</p>
+                    {% endfor %}
+                    <div class="forButtons">
+                        <div>
+
+                            <button class="btn" onclick="window.location.href='{% url 'gallery' %}'"><i class="animation"></i>Gallery<i class="animation"></i></button>
+                        </div>
+                        <div>
+                            <button class="btn" onclick="window.location.href='{% url 'blogs' %}'"><i class="animation"></i>Blog<i class="animation"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="image">
+                    <img src="{{homepage.comfort_image}}" alt="{{homepage.comfort_title}}">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="faq-section">
+        <div class="container">
+            <div class="faq-header">
+                <h2 class="title">Essential Morocco Travel Guide & FAQs</h2>
+            </div>
+            <div class="faq-grid">
+                <!-- FAQ Content Column -->
+                <div class="faq-content">
+                    {% for faq in faqs %}
+                    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <div class="faq-question">
+                            <h3 itemprop="name">{{ faq.question }}</h3>
+                            <span class="toggle-icon">
+                                <i class="fas fa-plus"></i>
+                            </span>
+                        </div>
+                        <div class="faq-answer" itemscope itemprop="acceptedAnswer"
+                            itemtype="https://schema.org/Answer">
+                            <div itemprop="text">
+                                <p>{{ faq.answer_title }}</p>
+                                <ul>
+                                    {% for item in faq.get_answer_items %}
+                                    <li>{{ item }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    
+                    
+                </div>
+    
+                <!-- Morocco Travel Tips Column -->
+                <div class="travel-tips">
+                    <div class="tips-card">
+                        <h3>Morocco Travel Tips</h3>
+                        <ul class="tips-list">
+                            <li>
+                                <i class="fas fa-language"></i>
+                                <span>Multi-language speaking country</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-history"></i>
+                                <span>Rich history dating back 1000+ years</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-glass-cheers"></i>
+                                <span>Vibrant nightlife in major cities</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-map-marked-alt"></i>
+                                <span>Diverse attractions & activities</span>
+                            </li>
+                        </ul>
+                        <div class="tips-cta">
+                            <a href="{% url 'contact' %}" class="plan-button">Plan Your Trip Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="{% static 'js/swipper.js' %}"></script>
+<script>
+    document.querySelectorAll('.faq-question').forEach(question => {
+    question.addEventListener('click', () => {
+        const faqItem = question.parentElement;
+        
+        // Close all other FAQ items
+        document.querySelectorAll('.faq-item').forEach(item => {
+            if (item !== faqItem) {
+                item.classList.remove('active');
+            }
+        });
+        
+        // Toggle current FAQ item
+        faqItem.classList.toggle('active');
+    });
+});
+</script>
+{% endblock %}

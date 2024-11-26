@@ -1,0 +1,233 @@
+:root {
+    --primary-color: rgb(68, 181, 164);
+    --primary-light: rgb(68, 181, 200);
+    --primary-dark: rgb(58, 155, 140);
+}
+*{
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+}
+a{
+    text-decoration: none;
+}
+.hero {
+    position: relative;
+    height: 60vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(68, 181, 200, 0.6)),
+                url('https://images.pexels.com/photos/5322747/pexels-photo-5322747.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 800px;
+    padding: 20px;
+}
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    animation: fadeInDown 1s ease;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    animation: fadeInUp 1s ease;
+}
+
+.contact-container {
+    max-width: 1200px;
+    margin: -100px auto 50px;
+    padding: 20px;
+    position: relative;
+}
+
+.contact-box {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(68, 181, 164, 0.1);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    padding: 50px;
+    animation: slideUp 1s ease;
+}
+
+.contact-info {
+    padding-right: 30px;
+}
+
+.contact-info h2 {
+    color: var(--primary-color);
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    color: #666;
+}
+.info-item a{
+    color: #666;
+}
+
+.info-item i {
+    font-size: 1.5rem;
+    margin-right: 15px;
+    color: var(--primary-color);
+    width: 40px;
+    height: 40px;
+    background: rgba(68, 181, 164, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #666;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 88%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+.form-group textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+/* Gradient Button Styles */
+.submit-btn {
+    padding: 15px 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    color: white;
+    background: linear-gradient(
+        45deg,
+        var(--primary-color),
+        var(--primary-light)
+    );
+    box-shadow: 0 4px 15px rgba(68, 181, 164, 0.3);
+    transition: all 0.3s ease;
+    align-self: flex-start;
+}
+
+.submit-btn:hover {
+    background: linear-gradient(
+        45deg,
+        var(--primary-light),
+        var(--primary-color)
+    );
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(68, 181, 164, 0.4);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 15px rgba(68, 181, 164, 0.3);
+}
+
+.error {
+    color: #f44336;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    display: none;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-box {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 30px;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .contact-info {
+        padding-right: 0;
+    }
+
+    .submit-btn {
+        width: 88%;
+    }
+}
+
+@media (max-width: 500px) {
+    .info-item i {
+        font-size: 1rem;
+        margin-right: 9px;
+        width: 30px;
+        height: 30px;
+    }
+    
+}

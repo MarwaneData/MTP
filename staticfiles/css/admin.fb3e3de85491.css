@@ -1,0 +1,21 @@
+/* Hide the default Django logo */
+.brand-logo {
+    background-image: url("../images/blog1.b59d78a2113b.png") !important; /* Path to your logo */
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 100px; /* Adjust height according to your logo */
+}
+
+/* Remove text next to logo if needed */
+.brand-logo img {
+    display: none;
+}
+
+.branding .logo, .branding .logo-text {
+    display: none; /* Hides the Django logo and text */
+}
+
+.branding .brand-logo {
+    display: block;
+    background-position: center;
+}

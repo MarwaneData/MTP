@@ -1,0 +1,182 @@
+/* camp-detail.css */
+.camp-detail {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+}
+
+.hero {
+    height: 80vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+}
+
+.hero h1 {
+    font-family: "Akaya Kanadaka", cursive;
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.hero .tagline {
+    font-size: 1.5rem;
+}
+
+.camp-overview {
+    padding: 4rem 0;
+    background-color: #f9f9f9;
+}
+
+.camp-overview .container {
+    display: flex;
+    gap: 2rem;
+}
+
+.camp-info {
+    flex: 1;
+}
+
+.camp-gallery {
+    flex: 1;
+}
+
+.amenities {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.amenities li {
+    background-color: #e0e0e0;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+}
+
+.swiper-container {
+    width: 100%;
+    height: 400px;
+}
+
+.accommodations, .experiences {
+    padding: 4rem 0;
+}
+
+.accommodation-types, .experience-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.accommodation-card, .experience-item {
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.accommodation-card:hover, .experience-item:hover {
+    transform: translateY(-5px);
+}
+
+.accommodation-card img, .experience-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.accommodation-card h3, .experience-item h3 {
+    padding: 1rem;
+    margin: 0;
+}
+
+.accommodation-card p, .experience-item p {
+    padding: 0 1rem 1rem;
+}
+
+.accommodation-card ul {
+    list-style-type: none;
+    padding: 0 1rem 1rem;
+}
+
+.book-btn {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background-color: #38b6ff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.book-btn:hover {
+    background-color: #2d91cc;
+}
+
+.booking, .contact {
+    padding: 4rem 0;
+    background-color: #f9f9f9;
+}
+
+.booking-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 0.5rem;
+}
+
+.form-group input, .form-group select, .form-group textarea {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.submit-btn {
+    grid-column: 1 / -1;
+    padding: 1rem;
+    background-color: #38b6ff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #2d91cc;
+}
+
+.contact-info {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+@media (max-width: 768px) {
+    .camp-overview .container {
+        flex-direction: column;
+    }
+
+    .booking-form {
+        grid-template-columns: 1fr;
+    }
+}

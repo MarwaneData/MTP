@@ -1,0 +1,268 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ daytrip.meta_title }}{% endblock %}
+{% block meta_description %}{{ daytrip.meta_description }}{% endblock %}
+{% block meta_keywords %}{{ daytrip.meta_keywords }}{% endblock %}
+{% block meta_author %}{{ daytrip.name }}{% endblock %}
+{% block og_title %}{{ daytrip.meta_title }}{% endblock %}
+{% block og_description %}{{ daytrip.meta_description }}{% endblock %}
+{% block og_image %}{{ daytrip.bigger_image.url }}{% endblock %}
+{% block twitter_title %}{{ daytrip.meta_title }}{% endblock %}
+{% block twitter_description %}{{ daytrip.meta_description }}{% endblock %}
+{% block twitter_image %}{{ daytrip.bigger_image.url }}{% endblock %}
+{% block canonical_url %}{{ request.build_absolute_uri }}{% endblock %}
+{% block style %}{% static 'css/tour.css' %}{% endblock %}
+{% block moreStyles %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+{% endblock %}
+
+{% block content %}
+<main>
+    <section class="hero" style="background-image: url('{{ daytrip.bigger_image.url }}');">
+        <div class="container">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h1>{{ daytrip.name }}</h1>
+                    <div class="info-box">
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i> Departure: {{ daytrip.departure_city }}
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-flag"></i> End Point: {{ daytrip.end_city }}
+                        </div>
+                    </div>
+                    <a class="contactbtn" href="#book">
+                        <div>
+                            <button class="btn"><i class="animation"></i>Request Day Trip<i class="animation"></i></button>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="tourDetails">
+        <div class="container">
+            <div class="tour-container">
+                <div class="tour-content">
+                    <div class="tour-section">
+                        <h2>Explore This Day Trip</h2>
+                        <div class="tab-menu">
+                            <button class="tab-button active" onclick="showContent('overview')">Overview</button>
+                            <button class="tab-button" onclick="showContent('details')">Details</button>
+                        </div>
+
+                        <!-- Overview Tab -->
+                        <div class="tab-content" id="overview">
+                            <h3 class="TourtitleInfo">Day Trip Description</h3>
+                            <p class="description">{{ daytrip.description }}</p>
+                            
+                            <h3 class="TourtitleInfo">Highlights</h3>
+                            <ul class="highlights">
+                                {% for highlight in daytrip.get_highlights_list %}
+                                    <li><i class="fa-regular fa-star"></i> {{ highlight }}</li>
+                                {% endfor %}
+                            </ul>
+                            
+                            <h3 class="TourtitleInfo">Included</h3>
+                            <ul class="included">
+                                {% for item in daytrip.get_included_list %}
+                                    <li><i class="fa-regular fa-circle-check"></i> {{ item }}</li>
+                                {% endfor %}
+                            </ul>
+                            <h3 class="TourtitleInfo">Excluded</h3>
+                            <ul class="included">
+                                {% for item in daytrip.get_included_list2 %}
+                                    <li><i class="fas fa-ban" style="color: brown;"></i> {{ item }}</li>
+                                {% endfor %}    
+                            </ul>
+                            <h3 class="TourtitleInfo">Best Prices</h3>
+                            <ul class="included">
+                                {% for item in daytrip.get_prices %}
+                                    <li><i class="fas fa-money-bill-wave" style="color: rgb(243, 182, 28);"></i> {{ item }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                        <!-- Details Tab (Dynamic Actions) -->
+                        <div class="tab-content" id="details" style="display: none;">
+                            {% for action in daytrip.actions.all %}
+                            <div class="day-detail">
+                                <h3 class="TourtitleInfo">Action {{ action.action_number }}: {{ action.title }}</h3>
+                                <p>{{ action.description }}</p>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!-- Gallery Section -->
+                    <div class="swiper-container">
+                        <div class="swiper-pagination"></div>
+                        <div class="swiper-wrapper">
+                            {% for image in daytrip.gallery_images.all %}
+                                <div class="swiper-slide"  style="height: 400px;">
+                                    <img src="{{ image.image.url }}" alt="{{ image.alt_text }}">
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar with Info -->
+                <div class="tour-sidebar">
+                    <div class="booking-form">
+                        <div id="book" class="briefly"><h3>Book This Day Trip</h3></div>
+                        <form method="post" action="{% url 'contact_email_trip' %}">
+                            {% csrf_token %}
+                            <input type="text" name="name" placeholder="Name" required>
+                            <input type="email" name="email" placeholder="Email" required>
+                            <input type="text" name="phone" placeholder="Phone Number" required>
+                            <input type="text" name="tour_name" placeholder="Day trip name" value="{{ daytrip.name }}" readonly>
+                            <textarea name="message" placeholder="Message" required></textarea>
+                            <button type="submit">Send</button>
+                        </form> 
+                    </div>
+                    <div class="brief-info">
+                        <div class="briefly"><h3>Briefly</h3></div>
+                        <ul>
+                            <div class="wayInformations">
+                                <li><i class="fa-regular fa-clock"></i> Duration: {{ daytrip.duration_hours }} Hours</li>
+                                <li><i class="fas fa-map-marker-alt"></i> Departure: {{ daytrip.departure_city }}</li>
+                                <li><i class="fas fa-flag"></i> End Point: {{ daytrip.end_city }}</li>
+                            </div>
+                            <div class="nights">
+                                <!-- Loop through the briefly points -->
+                                {% for point in daytrip.get_briefly_points_list %}
+                                <li><i class="fas fa-circle"></i> {{ point }}</li>
+                                {% endfor %}
+                            </div>
+                            
+                        </ul>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <h4>Get a Question?</h4>
+                        <p>Do not hesitate to give us a call.</p>
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <i class="fa fa-envelope"></i>
+                                <a style="color: black;" href="mailto:{{contact_info.email}}">{{contact_info.email}}</a>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fa fa-phone"></i>
+                                <a style="color: black;" href="tel:+{{contact_info.phone_number}}">+{{contact_info.phone_number}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>                      
+        </div>
+    </section>
+</main>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function showContent(contentId) {
+        document.querySelectorAll('.tab-content').forEach(function(content) {
+            content.style.display = 'none';
+        });
+        document.querySelectorAll('.tab-button').forEach(function(button) {
+            button.classList.remove('active');
+        });
+    
+        document.getElementById(contentId).style.display = 'block';
+        event.currentTarget.classList.add('active');
+    }
+    
+    document.getElementById('overview').style.display = 'block';
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const swiperContainer = document.querySelector('.swiper-container');
+        const swiperWrapper = document.querySelector('.swiper-wrapper');
+        const slides = document.querySelectorAll('.swiper-slide');
+        const pagination = document.querySelector('.swiper-pagination');
+        let currentIndex = 0;
+        let startX;
+        let currentX;
+        let isDragging = false;
+
+        // Create pagination dots
+        slides.forEach((_, index) => {
+            const dot = document.createElement('span');
+            dot.classList.add('swiper-pagination-bullet');
+            dot.addEventListener('click', () => showSlide(index));
+            pagination.appendChild(dot);
+        });
+
+        function showSlide(index) {
+            if (index < 0) index = slides.length - 1;
+            if (index >= slides.length) index = 0;
+            currentIndex = index;
+            const offset = -currentIndex * 100;
+            swiperWrapper.style.transform = `translateX(${offset}%)`;
+            updatePagination();
+        }
+
+        function updatePagination() {
+            const dots = document.querySelectorAll('.swiper-pagination-bullet');
+            dots.forEach((dot, index) => {
+                if (index === currentIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        // Touch and Mouse Events for Swiping
+        swiperContainer.addEventListener('touchstart', dragStart);
+        swiperContainer.addEventListener('touchmove', drag);
+        swiperContainer.addEventListener('touchend', dragEnd);
+        swiperContainer.addEventListener('mousedown', dragStart);
+        swiperContainer.addEventListener('mousemove', drag);
+        swiperContainer.addEventListener('mouseup', dragEnd);
+        swiperContainer.addEventListener('mouseleave', dragEnd);
+
+        function dragStart(e) {
+            isDragging = true;
+            startX = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
+            currentX = startX;
+            swiperWrapper.style.transition = 'none';
+        }
+
+        function drag(e) {
+            if (!isDragging) return;
+            e.preventDefault();
+            currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
+            const diff = currentX - startX;
+            const containerWidth = swiperContainer.offsetWidth;
+            const percentMove = (diff / containerWidth) * 100;
+            const currentTranslate = -currentIndex * 100 + percentMove;
+            swiperWrapper.style.transform = `translateX(${currentTranslate}%)`;
+        }
+
+        function dragEnd() {
+            if (!isDragging) return;
+            isDragging = false;
+            const containerWidth = swiperContainer.offsetWidth;
+            const movedPercent = ((currentX - startX) / containerWidth) * 100;
+            swiperWrapper.style.transition = 'transform 0.3s ease-out';
+            
+            if (movedPercent <= -10) {
+                showSlide(currentIndex + 1);
+            } else if (movedPercent >= 10) {
+                showSlide(currentIndex - 1);
+            } else {
+                showSlide(currentIndex);
+            }
+        }
+        showSlide(0);
+    });
+</script>
+{% endblock %}

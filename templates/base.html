@@ -1,0 +1,327 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Your Default Title{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}Your default description here{% endblock %}">
+    <meta name="keywords" content="{% block meta_keywords %}default, keywords, here{% endblock %}">
+    <meta name="author" content="{% block meta_author %}Your Name{% endblock %}">
+    <meta property="og:title" content="{% block og_title %}Your Default Title{% endblock %}">
+    <meta property="og:description"
+        content="{% block og_description %}Your default Open Graph description here{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{% endblock %}">
+    <meta property="og:url" content="{% block og_url %}{{ request.build_absolute_uri }}{% endblock %}">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% block twitter_title %}Your Default Title{% endblock %}">
+    <meta name="twitter:description"
+        content="{% block twitter_description %}Your default Twitter description here{% endblock %}">
+    <meta name="twitter:image" content="{% block twitter_image %}{% endblock %}">
+    <link rel="canonical" href="{% block canonical_url %}{{ request.build_absolute_uri }}{% endblock %}">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    {% block seometa %}
+    {% endblock %}
+    <link rel="stylesheet" href="{% static 'css/fontawesome/css/all.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% block style %}{% endblock %}">
+    {% block moreStyles %}{% endblock %}
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="header">
+                <div class="logo">
+                    <a href="{% url 'index' %}">
+                        <img src="{% static 'images/logo.png' %}" alt="morocco tours photographer">
+                    </a>
+                </div>
+                <nav class="nav" id="nav">
+                    <div class="headernav">
+                        <img class="logoimg" src="{% static 'images/logo.png' %}" alt="Logo">
+                        <img class="closebtn" src="{% static 'images/close icon.png' %}" alt="">
+                    </div>
+                    <ul>
+                        <li><a href="{% url 'index' %}" class=""><img src="{% static 'images/home icon.png' %}"
+                                    alt="Home Link">Home</a></li>
+                        <li><a href="{% url 'morocco-tours' %}"><img src="{% static 'images/morocco-tours icon.png' %}"
+                                    alt="Morocco Links">Morocco Desert Tours</a></li>
+                        <li><a href="{% url 'day-trips' %}"><img src="{% static 'images/day-trips icon.png' %}"
+                                    alt="Icon 3"> Day Trips</a></li>
+                        <li><a href="{% url 'PhotoGrapher-tours' %}"><img
+                                    src="{% static 'images/photography icon.png' %}" alt="Icon 4"> Photography</a></li>
+                        <li><a href="{% url 'DesertCamp' %}"><img src="{% static 'images/luxury icon.png' %}"
+                                    alt="Icon 4"> Luxury Desert camp</a></li>
+                        <li><a href="{% url 'about' %}"><img src="{% static 'images/about icon.png' %}" alt="Icon 4">
+                                About</a></li>
+                        <li><a href="{% url 'gallery' %}"><img src="{% static 'images/gallery icon.png' %}"
+                                    alt="Icon 4"> Gallery</a></li>
+                        <li><a href="{% url 'blogs' %}"><img src="{% static 'images/blog icon.png' %}" alt="Icon 4">
+                                Blog</a></li>
+                        <a class="secondcontact" href="{% url 'contact' %}">
+                            <div>
+                                <button class="btn"><i class="animation"></i>Contact<i class="animation"></i></button>
+                            </div>
+                        </a>
+                    </ul>
+                </nav>
+                <div class="burger">
+                    <img src="{% static 'images/burger.svg' %}" alt="burger button" width="28" height="26">
+                </div>
+                <a class="contactbtn" href="{% url 'contact' %}">
+                    <div>
+                        <button class="btn"><i class="animation"></i>Contact<i class="animation"></i></button>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    {% block content %}{% endblock %}
+    {% if not is_contact_page %}
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contactsection">
+                <div class="form">
+                    <h2>Get in Touch with Us</h2>
+                    <form method="POST" action="{% url 'contact_email' %}">
+                        {% csrf_token %}
+                        <div class="group">
+                            <div class="sub-group">
+                                <label for="name">Name</label>
+                                <input type="text" name="name" placeholder="Lucas" required>
+                            </div>
+                            <div class="sub-group">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" placeholder="lucas@example.com" required>
+                            </div>
+                        </div>
+                        <div class="group">
+                            <div class="sub-group">
+                                <label for="phone">Phone</label>
+                                <input type="text" name="phone" placeholder="+34 716 000 000">
+                            </div>
+                            <div class="sub-group">
+                                <label for="guests">Number of Guests</label>
+                                <input type="text" name="guests" placeholder="2">
+                            </div>
+                        </div>
+                        <div class="textarea">
+                            <div class="sub-group">
+                                <label for="message">Message</label>
+                                <textarea name="message" id="message"></textarea>
+                            </div>
+                        </div>
+                        <input type="submit" value="Contact us">
+                    </form>
+
+                </div>
+                <div class="contactinfo">
+                    <div class="cardscontact">
+                        <div class="card1">
+                            <div class="contact1">
+                                <img src="{% static 'images/email icon.png' %}" alt="our Email">
+                                <a style="color: black;" href="mailto:{{contact_info.email}}">{{contact_info.email}}</a>
+                            </div>
+                            <div class="contact1">
+                                <img src="{% static 'images/phone icon.png' %}" alt="Our number">
+                               <a style="color: black;" id="formatted-phone1" href="tel:+{{contact_info.phone_number}}">{{contact_info.phone_number}}</a>
+                            </div>
+                            <div class="contact1">
+                                <img src="{% static 'images/whatssap icon.png' %}" alt="whatssap">
+                                <a style="text-decoration: none; color: black;" id="formatted-phone" href="https://wa.me/{{ contact_info.phone_number }}"
+                                        target="_blank">{{contact_info.phone_number}}</a>
+                            </div>
+                        </div>
+                        <div class="card2">
+                            <blockquote class="styled-quote">
+                                It is the most beautiful place in the world. The scenery and architecture are beyond anything I have ever seen
+                                <cite>— Winston Churchill</cite>
+                                <a href="{% url 'blogs' %}" class="read-more">Explore more</a>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    <div id="fixed-icons" class="fixed-icons hidden">
+        {% if contact_info.whatssap_active and contact_info.whatssap_url %}
+        <a href="{{ contact_info.whatssap_url }}" target="_blank" aria-label="WhatsApp">
+            <img src="{% static 'images/whatssap.png' %}" alt="WhatsApp" class="icon">
+        </a>
+        {% endif %}
+
+        {% if contact_info.wechat_url_active and contact_info.wechat_url %}
+        <a href="{{ contact_info.wechat_url }}" target="_blank" aria-label="WeChat">
+            <img src="{% static 'images/wechat.png' %}" alt="WeChat" class="icon">
+        </a>
+        {% endif %}
+    </div>
+    {% if pop.is_active %}
+    <div class="popup" id="popup">
+        <a href="{{ pop.link }}">
+            <div class="popup-content">
+                <img src="{{ pop.image.url }}" alt="{{ pop.pop_title }}" class="popup-image">
+                <div class="popup-text">
+                    <h2>{{ pop.pop_title }}</h2>
+                    <p>{{ pop.description }}</p>
+                </div>
+                <button
+                    style="font-size: 22px; background: black; padding: 1px 7px; color: white; border-radius: 50%; z-index: 10;"
+                    class="popup-close" id="closePopup">×
+                </button>
+            </div>
+        </a>
+    </div>
+    {% endif %}
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-grid container">
+                <!-- Logo and About Section -->
+                <div class="footer-brand">
+                    <img src="{% static 'images/logo_background.png' %}" alt="Morocco Tours Logo" class="footer-logo">
+                    <p class="footer-description">Discover the magic of Morocco with our expertly crafted tours and
+                        authentic experiences.</p>
+                    <div class="social-links">
+                        {% if contact_info.facebook_active and contact_info.facebook_url %}
+                        <a href="{{ contact_info.facebook_url }}" target="_blank" aria-label="Facebook"><i
+                                class="fab fa-facebook-f"></i></a>
+                        {% endif %}
+                        {% if contact_info.instagram_active and contact_info.instagram_url %}
+                        <a href="{{ contact_info.instagram_url }}" target="_blank" aria-label="Instagram"><i
+                                class="fab fa-instagram"></i></a>
+                        {% endif %}
+                        {% if contact_info.twitter_active and contact_info.twitter_url %}
+                        <a href="{{ contact_info.twitter_url }}" target="_blank" aria-label="Twitter"><i
+                                class="fab fa-twitter"></i></a>
+                        {% endif %}
+                        {% if contact_info.youtube_active and contact_info.youtube_url %}
+                        <a href="{{ contact_info.youtube_url }}" target="_blank" aria-label="Youtube"><i
+                                class="fab fa-youtube"></i></a>
+                        {% endif %}
+                        {% if contact_info.wechat_url %}
+                        <a href="{{ contact_info.wechat_url }}" target="_blank" aria-label="Youtube"><i class="fab fa-weixin"></i></a>
+                        {% endif %}
+                    </div>
+
+                </div>
+
+                <!-- Tours Section -->
+                <div class="footer-section">
+                    <h3>Our Tours</h3>
+                    <ul>
+                        {% for tour in tours|slice:":4" %}
+                        <li><a href="{% url 'tour-detail' tour.slug %}">{{ tour.name }}</a></li>
+                        {% endfor %}
+                        <li><a href="{% url 'about' %}" class="view-all">All Tours →</a></li>
+                    </ul>
+                </div>
+
+                <!-- Day Trips Section -->
+                <div class="footer-section">
+                    <h3>Day Trips</h3>
+                    <ul>
+                        {% for excursion in excursions|slice:":4" %}
+                        <li><a href="{% url 'daytrip-detail' excursion.slug %}">{{ excursion.name }}</a></li>
+                        {% endfor %}
+                        <li><a href="{% url 'about' %}" class="view-all">All Day Trips →</a></li>
+                    </ul>
+                </div>        
+                <!-- Contact Section -->
+                <div class="footer-section contact-section">
+                    <h3>Contact Us</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone" style="margin-right: 15px;"></i><span
+                                id="formatted-phone3">+{{contact_info.phone_number}}</span></p>
+                        <p><i class="fas fa-envelope" style="margin-right: 15px;"></i>{{contact_info.email}}</p>
+                        <p><i class="fas fa-map-marker-alt" style="margin-right: 15px;"></i>{{contact_info.location}}
+                        </p>
+                    </div>
+                    <a href="{% url 'contact' %}" class="contact-btn">Get in Touch</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; {% now "Y" %} Morocco Tours Photographer</p>
+                <div class="footer-links">
+                    <a href="{% url 'blogs' %}">Our Blog</a>
+
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const popup = document.getElementById("popup");
+    const closePopup = document.getElementById("closePopup");
+
+    // Display the pop-up after 2 seconds
+    setTimeout(() => {
+        popup.classList.add("show");
+    }, 2000);
+
+    // Hide the pop-up when the close button is clicked
+    closePopup.addEventListener("click", (event) => {
+        event.preventDefault(); // Prevent link navigation
+        popup.classList.remove("show");
+    });
+});
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var currentUrl = window.location.pathname;
+            var navLinks = document.querySelectorAll(".nav ul li a");
+
+            navLinks.forEach(function (link) {
+                // Check if the link's href matches the current URL
+                if (link.getAttribute("href") === currentUrl) {
+                    link.classList.add("activelink");
+
+                    // Change the image source to the active version if applicable
+                    var img = link.querySelector("img");
+                    if (img) {
+                        var activeImgSrc = img.src.replace(".png", " active.png");
+                        img.src = activeImgSrc;
+                    }
+                }
+            });
+        });
+
+        var burder = document.querySelector(".burger");
+        var nav = document.querySelector(".nav");
+        var closebtn = document.querySelector(".closebtn");
+        burder.addEventListener("click", () => {
+            nav.classList.toggle("show");
+        })
+        closebtn.addEventListener("click", () => {
+            nav.classList.toggle("show");
+        })
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Set timeout for 3 seconds to show the icons
+            setTimeout(function () {
+                document.getElementById("fixed-icons").classList.add("visible");
+            }, 3000); // 3000 milliseconds = 3 seconds
+        });
+
+
+        const phoneNumber = "{{ contact_info.phone_number|escapejs }}";
+        const formattedPhoneNumber = `+${phoneNumber.slice(0, 3)} ${phoneNumber.slice(3, 6)} ${phoneNumber.slice(6, 9)} ${phoneNumber.slice(9)}`;
+        document.getElementById('formatted-phone').textContent = formattedPhoneNumber;
+        document.getElementById('formatted-phone1').textContent = formattedPhoneNumber;
+        document.getElementById('formatted-phone3').textContent = formattedPhoneNumber;
+    </script>
+
+    {% block scripts %}{% endblock %}
+</body>
+
+</html>

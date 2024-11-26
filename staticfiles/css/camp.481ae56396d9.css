@@ -1,0 +1,265 @@
+:root {
+    --primary-color: #c2a25d;
+    --secondary-color: #8b7b57;
+    --text-color: #333;
+    --background-color: #f9f9f9;
+    --white: #ffffff;
+}
+.cta-button {
+    background-color: var(--primary-color);
+    color: var(--white) !important;
+    padding: 10px 20px;
+    border-radius: 30px;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: var(--secondary-color);
+}
+
+.parallax {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#hero {
+    height: 92vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--white);
+}
+
+.hero-content {
+    padding: 40px;
+    border-radius: 10px;
+}
+
+#hero h1 {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+#hero p {
+    font-size: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+section {
+    padding: 100px 0;
+}
+
+.lead-text {
+    font-size: 15px;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 40px;
+}
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-top: 60px;
+}
+
+.feature {
+    text-align: center;
+}
+
+.feature i {
+    font-size: 38px;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.feature h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+#accommodations {
+    background-image: url('https://images.unsplash.com/photo-1542401886-65d6c61db217?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+    color: var(--white);
+}
+
+.suite-slider {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.suite-slide {
+    display: flex;
+    align-items: center;
+}
+
+.suite-slide img {
+    width: 50%;
+    height: 500px;
+    object-fit: cover;
+}
+
+.suite-info {
+    width: 50%;
+    padding: 40px;
+}
+
+.suite-info h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.suite-info ul {
+    list-style: none;
+    margin-top: 20px;
+}
+
+.suite-info ul li {
+    margin-bottom: 10px;
+}
+
+.suite-info ul li i {
+    color: var(--primary-color);
+    margin-right: 10px;
+}
+
+.btn-book {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 10px 22px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.btn-book:hover {
+    background-color: var(--secondary-color);
+}
+
+.experience-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.experience-card {
+    background-color: var(--white);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.experience-card:hover {
+    transform: translateY(-10px);
+}
+
+.experience-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.card-content h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+#dining {
+    color: var(--white);
+}
+
+.dining-highlights {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.highlight {
+    text-align: center;
+    margin: 20px;
+}
+
+.highlight i {
+    font-size: 32px;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+#booking {
+    background-color: var(--background-color);
+}
+
+.booking-form {
+    background-color: var(--white);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: #333;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+.btn-submit {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 12px 30px;
+    border: none;
+    border-radius: 30px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: var(--secondary-color);
+}
+
+
+
+@media (max-width: 768px) {
+    .suite-slide {
+        flex-direction: column;
+    }
+
+    .suite-slide img,
+    .suite-info {
+        width: 100%;
+    }
+
+    .footer-content {
+        flex-direction: column;
+    }
+}

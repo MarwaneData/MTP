@@ -1,0 +1,118 @@
+.textImageFlex{
+    padding: 60px 0;
+    background: linear-gradient(180deg, #FFFFFF 7.47%, #FDFBF9 58.55%, #FFFFFF 100%);
+}
+.full{
+    display: flex;
+    justify-content: space-evenly;
+}
+.full.between-scapce{
+    justify-content: space-between;
+}
+.full-reverse{
+    flex-direction: row-reverse;
+}
+.full .image{
+    max-width: 38%;
+}
+.full .step{
+    font-size: 14px;
+    font-size: 500;
+    color: #21233b;
+}
+.full .title.no-center{
+    text-align: left;
+}
+.image img{
+    max-width: 100%;
+}
+.textContent{
+    width: 48%;
+}
+.full .text{
+    margin: 10px 0 ;
+    color: #6F757E;
+}
+.forButtons{
+    display: flex;
+    margin: 20px 0 0 0;
+}
+.forButtons .btn{
+    margin: 0 15px;
+    min-width: 100px;
+}
+
+@media screen and (max-width: 900px){
+    .full .text{
+        font-size: 14px;
+    }
+    .full .image{
+        max-width: 38%;
+    }
+    .textContent{
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 840px){
+    .full{
+        display: flex;
+        flex-direction: column;
+    }
+    .full-reverse{
+        flex-direction: column;
+    }
+    .full .text{
+        font-size: 13px;
+        text-align: center;
+    }
+    .full .image{
+        max-width: 80%;
+        margin: 0 auto;
+    }
+    .textContent{
+        width: 90%;
+        margin: 0 auto;
+    }
+    .forButtons{
+        align-items: center;
+        justify-content: center;
+        margin: 13px 0 18px 0 ;
+    }
+    .forButtons .btn{
+        margin: 0 20px;
+    }
+    .textImageFlex{
+        padding: 40px 0;
+    }
+    .full .title.no-center{
+        text-align: center;
+    }
+    .full h4{
+        text-align: center;
+    }
+    .imagebigger .image{
+        max-width: initial !important;
+        width: 90%;
+        margin: 20px  auto 0 ;
+    }
+    
+    .imagebigger .textContent{
+        max-width: initial !important;
+        text-align: center;
+    }
+}
+@media screen and (max-width: 640px){
+    .MoroccoTours {
+        padding: 30px 0;
+    }
+    .textImageFlex{
+        padding: 20px 0;
+    }
+    .title{
+        margin-bottom: 20px;
+    }
+}
+
+
+

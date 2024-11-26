@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ camp.meta_title }}{% endblock %}
+{% block meta_description %}{{ camp.meta_description }}{% endblock %}
+{% block meta_keywords %}{{ camp.meta_keywords }}{% endblock %}
+{% block meta_author %}{{ camp.name }}{% endblock %}
+{% block og_title %}{{ camp.meta_title }}{% endblock %}
+{% block og_description %}{{ camp.meta_description }}{% endblock %}
+{% block og_image %}{{ camp.hero_image.url }}{% endblock %}
+{% block style %}{% static 'css/camp.css' %}{% endblock %}
+{% block moreStyles %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+<main>
+    <section id="hero" class="parallax" style="background-image: url('{{ camp.hero_image.url }}');">
+        <div class="hero-content">
+            <h1>{{ camp.name }}</h1>
+            <p>{{ camp.heroDescription }}</p>
+        </div>
+    </section>
+
+    <section id="overview">
+        <div class="container">
+            <h2 class="title">{{ camp.name }} Overview</h2>
+            <p class="lead-text">{{ camp.description }}</p>
+            <div class="feature-grid">
+                <div class="feature">
+                    <i class="{{ camp.feature_1_icon }}"></i>
+                    <h3>{{ camp.feature_1_title }}</h3>
+                    <p>{{ camp.feature_1_description }}</p>
+                </div>
+                <div class="feature">
+                    <i class="{{ camp.feature_2_icon }}"></i>
+                    <h3>{{ camp.feature_2_title }}</h3>
+                    <p>{{ camp.feature_2_description }}</p>
+                </div>
+                <div class="feature">
+                    <i class="{{ camp.feature_3_icon }}"></i>
+                    <h3>{{ camp.feature_3_title }}</h3>
+                    <p>{{ camp.feature_3_description }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="accommodations" class="parallax">
+        <div class="container">
+            <h2 class="title">Luxurious Desert Suite Information</h2>
+            <div class="suite-slider">
+                <div class="suite-slide">
+                    <img src="{{ camp.suite_image.url }}" alt="{{ camp.suite_name }}">
+                    <div class="suite-info">
+                        <h3>{{ camp.suite_name }}</h3>
+                        <p>{{ camp.suite_description }}</p>
+                        <ul>
+                            <li><i class="fas fa-users"></i> {{ camp.suite_guest_capacity }}</li>
+                            <li><i class="fas fa-bed"></i> {{ camp.suite_bed_type }}</li>
+                            <li><i class="fas fa-bath"></i> {{ camp.suite_bathroom_type }}</li>
+                            {% for feature in suite_additional_features %}
+                                <li><i class="fa-solid fa-caret-right"></i>{{ feature }}</li>
+                            {% endfor %}
+                        </ul>
+                        <div style="display: flex; align-items: center; margin: 30px 0 0 0;">
+                            <div style="font-family: Arial, sans-serif; display: flex; flex-direction: column; gap: 4px; margin-right: 20px;">
+                                <span style="color: #ffffff; font-size: 20px; font-weight: bold; margin: 0;">€{{ camp.price }}</span>
+                                <span style="text-decoration: line-through; color: #999; font-size: 15px;">€{{ camp.old_price }}</span>
+                            </div>
+                           <div> <a href="#booking" class="btn-book">Reserve Now</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="experiences">
+        <div class="container">
+            <h2 class="title">Unforgettable Desert Experiences</h2>
+            <div class="experience-grid">
+                <div class="experience-card">
+                    <img src="{{ camp.experience_1_image.url }}" alt="{{ camp.experience_1_title }}">
+                    <div class="card-content">
+                        <h3>{{ camp.experience_1_title }}</h3>
+                        <p>{{ camp.experience_1_description }}</p>
+                    </div>
+                </div>
+                <div class="experience-card">
+                    <img src="{{ camp.experience_2_image.url }}" alt="{{ camp.experience_2_title }}">
+                    <div class="card-content">
+                        <h3>{{ camp.experience_2_title }}</h3>
+                        <p>{{ camp.experience_2_description }}</p>
+                    </div>
+                </div>
+                <div class="experience-card">
+                    <img src="{{ camp.experience_3_image.url }}" alt="{{ camp.experience_3_title }}">
+                    <div class="card-content">
+                        <h3>{{ camp.experience_3_title }}</h3>
+                        <p>{{ camp.experience_3_description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dining Section -->
+    <section id="dining" class="parallax" style="background-image: url('{{ camp.dining_image.url }}');">
+        <div class="container">
+            <h2 class="title">Exquisite Desert Dining</h2>
+            <p class="lead-text">Indulge in a culinary journey that blends Moroccan flavors with international cuisine, all set against the backdrop of the stunning Sahara.</p>
+            <div class="dining-highlights">
+                <div class="highlight">
+                    <i class="fas fa-star"></i>
+                    <p>{{ camp.dining_highlight_1 }}</p>
+                </div>
+                <div class="highlight">
+                    <i class="fas fa-glass-cheers"></i>
+                    <p>{{ camp.dining_highlight_2 }}</p>
+                </div>
+                <div class="highlight">
+                    <i class="fas fa-fire"></i>
+                    <p>{{ camp.dining_highlight_3 }}</p>
+                </div>
+                <div class="highlight">
+                    <i class="fas fa-moon"></i>
+                    <p>{{ camp.dining_highlight_4 }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="booking">
+        <div class="container">
+            <h2 class="title">Reserve Your Desert Retreat</h2>
+            <form id="booking-form" class="booking-form" method="post" action="{% url 'contact_email2' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="check-in">Check-in Date</label>
+                    <input type="date" id="check-in" name="check_in" required>
+                </div>
+                <div class="form-group">
+                    <label for="check-out">Check-out Date</label>
+                    <input type="date" id="check-out" name="check_out" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="e.g., example@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="e.g., 0612345678" required>
+                </div>
+                <div class="form-group">
+                    <label for="guests">Number of Guests</label>
+                    <input type="number" id="guests" name="guests" min="1" max="4" required>
+                </div>
+                <div class="form-group">
+                    <label for="suite">Suite Type</label>
+                    <select id="suite" required name="suite">
+                        <option value="{{ camp.suite_name }}">{{ camp.suite_name }}</option>
+                    </select>
+                </div>
+                <div class="form-group full-width">
+                    <label for="special-requests">Special Requests</label>
+                    <textarea id="special-requests" name="special_requests" rows="4"></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Request Reservation</button>
+            </form>
+        </div>
+    </section>
+    
+</main>
+
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}
+
+
+

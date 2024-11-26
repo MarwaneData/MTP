@@ -1,0 +1,120 @@
+.slider-wrapper {
+    overflow: hidden;
+    max-width: 1100px;
+    margin: 0 70px 55px;
+    background-color: transparent;
+    padding: 20px;
+}
+a{
+    color: #000000;
+}
+.tour-card {
+    width: 300px;
+    max-width: 310px !important;
+    height: auto;
+    min-height: 430px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    background-color: white;
+}
+.imageTour {
+    width: 100%;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 0  0 10px 10px  ;
+}
+.imageTour img{
+    width: 100%;
+    height: -webkit-fill-available;
+    border-radius: 0  0 10px 10px  ;
+}
+.tourInfo {
+    padding: 20px;
+}
+.tourInfo h3 {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: black;
+}
+.slider-wrapper .swiper-pagination-bullet {
+    background: #3FAC9B;
+    height: 13px;
+    width: 13px;
+    opacity: 0.5;
+}
+.slider-wrapper .swiper-pagination-bullet-active {
+    opacity: 1;
+}
+.slider-wrapper .swiper-slide-button {
+    color: #44B5A4;
+    margin-top: -55px;
+    transition: 0.2s ease;
+    transform: scale(0.5);
+    background-color:#F2F6F3;
+    padding: 40px !important;
+    border-radius: 50%;
+    box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.11);
+}
+.slider-wrapper .swiper-slide-button:hover {
+    color: #208273;
+}
+.days{
+    font-size: 16px;
+    color: #303030;
+}
+.days i{
+    margin: 0 5px 14px 0;
+}
+.description{
+    font-size: 14px;    
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+    color: #000000;
+    text-align: justify;
+}
+
+.PhotoshootsTour .iconShooting{
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    display: flex;
+    padding: 7px 10px;
+    background: #ffffff;
+    align-items: center;
+    justify-content: space-between;
+    color: #C71343;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 8px;
+}
+.PhotoshootsTour .iconShooting i {
+    margin-right: 5px;
+    font-size: 16px;
+}
+.PhotoshootsTour .tour-card{
+    position: relative;
+}
+
+@media (max-width: 768px) {
+.slider-wrapper {
+    margin: 0 10px 40px;
+}
+.slider-wrapper .swiper-slide-button {
+    display: none;
+}
+.privateTour {
+    padding: 15px 0;
+}
+}
+
+@media screen and (max-width: 500px){
+    .tour-card{
+        max-width: initial !important;
+    }
+}

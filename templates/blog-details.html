@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ blog.meta_title }}{% endblock %}
+{% block meta_description %}{{ blog.meta_description }}{% endblock %}
+{% block meta_keywords %}{{ blog.meta_keywords }}{% endblock %}
+{% block meta_author %}{{ blog.meta_title }}{% endblock %}
+{% block og_title %}{{ blog.meta_title }}{% endblock %}
+{% block og_description %}{{ blog.meta_description }}{% endblock %}
+{% block og_image %}{{ blog.hero_image.url }}{% endblock %}
+{% block twitter_title %}{{ blog.meta_title }}{% endblock %}
+{% block twitter_description %}{{ blog.meta_description }}{% endblock %}
+{% block twitter_image %}{{ blog.hero_image.url }}{% endblock %}
+{% block canonical_url %}{{ request.build_absolute_uri }}{% endblock %}
+{% block style %}{% static 'css/blog-detail.css' %}{% endblock %}
+{% block moreStyles %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+<main>
+    <article class="blog-post">
+        <header class="blog-header">
+            <h1 class="blog-title">{{ blog.blog_title }}</h1>
+            <div class="blog-meta">
+                <span class="datein"><i class="fas fa-calendar"></i> Posted on: {{ blog.posted_date }}</span>
+                <span class="view-count"><i class="fas fa-eye"></i> {{ blog.view_count }} views</span>
+                <span class="writeby"><i class="fas fa-user"></i> By {{ blog.author_name }}</span>
+            </div>
+        </header>
+  
+        <div class="blog-content">
+            <img src="{{ blog.hero_image.url }}" alt="Blog Hero Image" class="blog-image1">
+            
+            {% for block in blog.content_blocks.all %}
+                <section class="content-block">
+                    {% if block.title %}
+                        <h2 class="section-title">{{ block.title }}</h2>
+                    {% endif %}
+                    
+                    {% if block.image_content %}
+                        <img src="{{ block.image_content.url }}" alt="{{ block.alt_text }}" class="blog-image1">
+                    {% endif %}
+
+                    {% if block.text_content %}
+                        <div class="blog-text">{{ block.formatted_text|safe }}</div>
+                    {% endif %}
+                    {% if forloop.first %}
+                        <div class="tour-promo">
+                            <h3 class="tour-promo-title">{{ blog.related_title }}</h3>
+                            <p>{{ blog.related_paragraph }}</p>
+                            <a href="{{ blog.button_link }}" class="tour-button">{{ blog.button_text }}</a>
+                        </div>
+                    {% endif %}
+                </section>
+            {% endfor %}
+        </div>
+
+        {% if blog.related_title_tour %}
+            <div class="tour-promo">
+                <h3 class="tour-promo-title">{{ blog.related_title_tour }}</h3>
+                <p>{{ blog.related_description_tour }}</p>
+                <a href="{{ blog.link }}" class="tour-button">{{ blog.button_text }}</a>
+            </div>
+        {% endif %}
+    </article>
+
+    <section class="more-blogs-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">More Travel Stories</h2>
+            </div>
+            <div class="blog-grid">
+                {% for related in related_blogs %}
+                <article class="blog-card">
+                    <img src="{{ related.hero_image.url }}" alt="{{ related.blog_title }}" class="blog-image">
+                    <div class="blog-content">
+                        <span class="blog-category">{{ related.category }}</span>
+                        <h3 class="blog-title2">{{ related.blog_title }}</h3>
+                        <p class="blog-excerpt">{{ related.meta_description|truncatewords:20 }}</p>
+                        <div class="blog-meta2">
+                            <span>{{ related.posted_date }}</span>
+                            <a href="{% url 'detailBlog' related.slug %}" class="read-more">Read More</a>
+                        </div>
+                    </div>
+                </article>
+                {% empty %}
+                    <p>No related blogs available at the moment.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const viewCount = document.querySelector('.view-count');
+        const datein = document.querySelector('.datein');
+        const writeby = document.querySelector('.writeby');
+        viewCount.style.opacity = '0';
+        setTimeout(() => {
+            viewCount.style.opacity = '1';
+        }, 500);
+        datein.style.opacity = '0';
+        setTimeout(() => {
+            datein.style.opacity = '1';
+        }, 500);
+        writeby.style.opacity = '0';
+        setTimeout(() => {
+            writeby.style.opacity = '1';
+        }, 500);
+    });
+</script>
+{% endblock %}

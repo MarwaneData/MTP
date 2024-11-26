@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ blog_page.meta_title }}{% endblock %}
+{% block meta_description %}{{ blog_page.meta_description }}{% endblock %}
+{% block meta_keywords %}{{ blog_page.meta_keywords }}{% endblock %}
+{% block meta_author %}Discover Morocco Tours{% endblock %}
+{% block og_title %}{{ blog_page.meta_title }}{% endblock %}
+{% block og_description %}{{ blog_page.meta_description }}{% endblock %}
+{% block og_image %}{{ blog_page.hero_image.url }}{% endblock %}
+{% block twitter_title %}{{ blog_page.meta_title }}{% endblock %}
+{% block twitter_description %}{{ blog_page.meta_description }}{% endblock %}
+{% block twitter_image %}{{ blog_page.hero_image.url }}{% endblock %}
+{% block canonical_url %}{{ request.build_absolute_uri }}{% endblock %}
+{% block style %}{% static 'css/blogs.css' %}{% endblock %}
+{% block moreStyles %}{% endblock %}
+
+{% block content %}
+<main>
+    <section class="hero" style="background-image: url('{{ blog_page.hero_image.url }}');">
+        <div class="container">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h1>{{ blog_page.hero_title }}</h1>
+                    <p>{{ blog_page.hero_subtitle }}</p>
+                    <div>
+                        <a class="blogBtn" href="#allblogs">Start Reading</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="blogs">
+        <div class="container" id="allblogs">
+            <h2 class="title">Enjoy our blogs about Morocco</h2>
+            <div class="allBlogs">
+                {% for blog in blogs %}
+                <div class="card">
+                    <a href="{% url 'detailBlog' blog.slug %}">
+                        <div class="card-image">
+                            <img src="{{ blog.hero_image.url }}" alt="{{ blog.blog_title }}">
+                        </div>
+                        <div class="card-content">
+                            <h3>{{ blog.blog_title }}</h3>
+                            <p>{{ blog.blog_description }}</p>
+                        </div>
+                        <hr>
+                        <div class="card-footer">
+                            <span class="number">{{ blog.view_count }}</span>
+                            <span class="views">&#128065;</span>
+                        </div>
+                    </a>
+                </div>
+                {% empty %}
+                <p>No blogs available at the moment.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

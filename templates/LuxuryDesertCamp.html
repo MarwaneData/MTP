@@ -1,0 +1,235 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block title %}{{ desert_camp_page.meta_title }}{% endblock %}
+{% block meta_description %}{{ desert_camp_page.meta_description }}{% endblock %}
+{% block meta_keywords %}{{ desert_camp_page.meta_keywords }}{% endblock %}
+{% block meta_author %}{{ desert_camp_page.meta_title }}{% endblock %}
+{% block og_title %}{{ desert_camp_page.meta_title }}{% endblock %}
+{% block og_description %}{{ desert_camp_page.meta_description }}{% endblock %}
+{% block og_image %}{{ desert_camp_page.hero_image.url }}{% endblock %}
+{% block twitter_title %}{{ desert_camp_page.meta_title }}{% endblock %}
+{% block twitter_description %}{{ desert_camp_page.meta_description }}{% endblock %}
+{% block twitter_image %}{{ desert_camp_page.hero_image.url }}{% endblock %}
+{% block canonical_url %}{{ request.build_absolute_uri }}{% endblock %}
+{% block style %}{% static 'css/desertCamp.css' %}{% endblock %}
+{% block seometa %}
+<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "{{ request.scheme }}://{{ request.get_host }}"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Morocco Luxury Desert Camps",
+          "item": "{{ request.build_absolute_uri }}"
+        }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "TouristAttraction",
+          "name": "{{ desert_camp_page.meta_title }}",
+          "description": "{{ desert_camp_page.meta_description }}",
+          "image": "{{ request.scheme }}://{{ request.get_host }}{{ desert_camp_page.hero_image.url }}",
+          "touristType": "Luxury Desert Camp",
+          "location": {
+            "@type": "Place",
+            "name": "Morocco",
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 31.7917,
+              "longitude": -7.0926
+            },
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "{{contact_info.location}}",
+              "addressCountry": "MA"
+            }
+          },
+          "offers": {
+            "@type": "OfferCatalog",
+            "name": "Luxury Desert Camp Suites",
+            "itemListElement": [
+              {% for camp in camps %}
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Accommodation",
+                  "name": "{{ camp.suite_name }}",
+                  "description": "{{ camp.suite_description|default:camp.suite_name }}",
+                  "bed": "{{ camp.suite_bed_type }}",
+                  "occupancy": {
+                    "@type": "QuantitativeValue",
+                    "maxValue": {{ camp.suite_guest_capacity }}
+                  },
+                  "image": "{{ request.scheme }}://{{ request.get_host }}{{ camp.suite_image.url }}",
+
+                },
+                "price": "{{ camp.price }}",
+                "priceCurrency": "EUR",
+                "availability": "https://schema.org/InStock",
+                "url": "{{ request.build_absolute_uri }}{% url 'camp-detail' camp.slug %}"
+              }{% if not forloop.last %},{% endif %}
+              {% endfor %}
+            ]
+          },
+          "potentialAction": {
+            "@type": "ReserveAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "{{ request.build_absolute_uri }}#contact",
+              "inLanguage": "en",
+              "actionPlatform": [
+                "http://schema.org/DesktopWebPlatform",
+                "http://schema.org/MobileWebPlatform"
+              ]
+            },
+            "result": {
+              "@type": "TouristAttraction",
+              "name": "Book a Morocco Luxury Desert Camp"
+            }
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+{{contact_info.phone_number}}",
+            "contactType": "Customer Service",
+            "areaServed": "MA",
+            "availableLanguage": ["English", "French", "Arabic"]
+          }
+        }
+        </script>
+        <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Morocco Tours Photographer",
+              "url": "{{ request.build_absolute_uri }}",
+              "logo": "{{ request.scheme }}://{{ request.get_host }}/static/images/logo.png",
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+{{contact_info.phone_number}}",
+                "contactType": "Customer Service",
+                "areaServed": "MA",
+                "availableLanguage": ["English", "French", "Arabic"]
+              }
+            }
+            </script>
+        
+{% endblock %}
+{% block moreStyles %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+<link rel="stylesheet" href="{% static 'css/textImage.css' %}" />
+{% endblock %}
+
+{% block content %}
+<main>
+    <section class="hero" style="background-image: url({{ desert_camp_page.hero_image.url }});">
+        <div class="container">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h1>{{ desert_camp_page.hero_title }}</h1>
+                    <p>{{ desert_camp_page.hero_paragraph }}</p>
+                    <a class="contactbtn" href="#camps">
+                        <div>
+                            <button class="btn"><i class="animation"></i>Request Camp<i class="animation"></i></button>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="textImageFlex">
+        <div class="container">
+            <div class="full imagebigger centeredContent">
+                <div class="textContent">
+                    <h2 class="title">{{ desert_camp_page.first_section_title }}</h2>
+                    <p class="text">{{ desert_camp_page.first_section_text }}</p>
+                </div>
+                <div class="image">
+                    <img src="{{ desert_camp_page.first_section_image.url }}" alt="Image for {{ desert_camp_page.first_section_title }}">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="campsdesert">
+        <div class="container">
+            <h2 class="title" id="camps">{{ desert_camp_page.camps_section_title }}</h2>
+            <div class="camps">
+                {% for camp in camps %}
+                <div class="camp">
+                    <div class="image" style="background-image: url('{{ camp.suite_image.url }}');">
+                    </div>
+                    <div class="description">
+                        <h3>{{ camp.suite_name }}</h3>
+                        <div class="bed">
+                            <img src="{% static 'images/bed.png' %}" alt="">
+                            <p>{{ camp.suite_bed_type }}</p>
+                        </div>
+                        <div class="persons">
+                            <img src="{% static 'images/persons.png' %}" alt="">
+                            <p>{{ camp.suite_guest_capacity }}</p>
+                        </div>
+                        <div class="book">
+                            <a href="{% url 'camp-detail' camp.slug %}" class="book-now-link">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Book Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <p>No camps available at the moment.</p>
+                {% endfor %}
+                       
+            </div>
+        </div>
+    </section>
+
+    <section class="smallinfo">
+        <div class="container">
+            <div class="camp-images">
+                <div class="image-item"><img src="{{ desert_camp_page.small_info_image.url }}" alt="Camp Image"></div>
+            </div>
+            <div class="camp-content">
+                <div class="content">
+                    <h2>{{ desert_camp_page.small_info_title }}</h2>
+                    <p>{{ desert_camp_page.small_info_text }}</p>
+                </div>
+                <a class="contactbtn" href="#">
+                    <div>
+                        <button class="btn"><i class="animation"></i>Request Camp<i class="animation"></i></button>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="textImageFlex">
+        <div class="container">
+            <div class="full imagebigger centeredContent full-reverse">
+                <div class="textContent">
+                    <h2 class="title">{{ desert_camp_page.second_section_title }}</h2>
+                    <p class="text">{{ desert_camp_page.second_section_text }}</p>
+                </div>
+                <div class="image">
+                    <img src="{{ desert_camp_page.second_section_image.url }}" alt="Image for {{ desert_camp_page.second_section_title }}">
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

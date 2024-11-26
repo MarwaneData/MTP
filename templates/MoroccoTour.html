@@ -1,0 +1,255 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ morocco_tours_page.meta_title }}{% endblock %}
+{% block meta_description %}{{ morocco_tours_page.meta_description }}{% endblock %}
+{% block meta_keywords %}{{ morocco_tours_page.meta_keywords }}{% endblock %}
+{% block meta_author %}Discover Morocco Tours{% endblock %}
+{% block og_title %}{{ morocco_tours_page.meta_title }}{% endblock %}
+{% block og_description %}{{ morocco_tours_page.meta_description }}{% endblock %}
+{% block og_image %}{{morocco_tours_page.hero_image}}{% endblock %}
+{% block twitter_title %}{{morocco_tours_page.meta_title}}{% endblock %}
+{% block twitter_description %}{{morocco_tours_page.meta_description}}{% endblock %}
+{% block twitter_image %}{{morocco_tours_page.hero_image.url}}{% endblock %}
+{% block canonical_url %}{{ request.build_absolute_uri }}{% endblock %}
+{% block style %}{% static 'css/moroccoTours.css' %}{% endblock %}
+{% block seometa %}
+<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TouristAttraction",
+      "name": "{{ morocco_tours_page.meta_title }}",
+      "description": "{{ morocco_tours_page.meta_description }}",
+      "image": "{{ request.scheme }}://{{ request.get_host }}{{ morocco_tours_page.hero_image.url }}",
+      "touristType": "Adventure Travel",
+      "location": {
+        "@type": "Place",
+        "name": "Morocco",
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 31.7917,
+          "longitude": -7.0926
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "{{contact_info.location}}",
+          "addressCountry": "MA"
+        }
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Morocco Tour Packages",
+        "itemListElement": [
+          {% for tour in tours %}
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Tour",
+              "name": "{{ tour.name }}",
+              "description": "{{ tour.description}}",
+              "touristType": "Adventure Travel",
+              "duration": "P{{ tour.duration_days }}D",
+              "image": "{{ tour.small_image.url }}",
+              "offers": {
+                "@type": "Offer",
+                "price": "{{ tour.price }}",
+                "priceCurrency": "USD",
+                "url": "{{ request.build_absolute_uri }}{% url 'tour-detail' tour.slug %}"
+              }
+            }
+          }{% if not forloop.last %},{% endif %}
+          {% endfor %}
+        ]
+      },
+      "potentialAction": {
+        "@type": "ReserveAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "{{ request.build_absolute_uri }}#contact",
+          "inLanguage": "en",
+          "actionPlatform": [
+            "http://schema.org/DesktopWebPlatform",
+            "http://schema.org/MobileWebPlatform"
+          ]
+        },
+        "result": {
+          "@type": "TouristAttraction",
+          "name": "Book a Morocco Tour"
+        }
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+{{contact_info.phone_number}}",
+        "contactType": "Customer Service",
+        "areaServed": "MA",
+        "availableLanguage": ["English", "French", "Arabic"]
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Private Morocco Tours",
+              "item": "{% url 'morocco-tours' %}"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Photographer Morocco Tours",
+              "item": "{% url 'PhotoGrapher-tours' %}"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Luxury Desert Camp",
+              "item": "{% url 'DesertCamp' %}"
+            },
+            {
+              "@type": "ListItem",
+              "position": 4,
+              "name": "Gallery",
+              "item": "{% url 'gallery' %}"
+            },
+            {
+              "@type": "ListItem",
+              "position": 5,
+              "name": "Blog",
+              "item": "{% url 'blogs' %}"
+            }
+          ]
+        }
+        </script>
+        
+        
+{% endblock %}
+{% block moreStyles %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+<link rel="stylesheet" href="{% static 'css/textImage.css' %}" />
+{% endblock %}
+
+{% block content %}
+<main>
+    <section class="hero" style="background-image: url('{{ morocco_tours_page.hero_image.url }}');">
+        <div class="container">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h1>{{ morocco_tours_page.hero_title }}</h1>
+                    <p>{{ morocco_tours_page.hero_paragraph }}</p>
+                    {% if morocco_tours_page.display_hero_button %}
+                        <a class="contactbtn" href="{{ morocco_tours_page.hero_button_url }}">
+                            <button class="btn"><i class="animation"></i>{{ morocco_tours_page.hero_button_text }}<i class="animation"></i></button>
+                        </a>
+                    {% endif %}
+                </div>
+                <div class="services">
+                    <div class="service-item">
+                        <img src="{{ morocco_tours_page.service_image1.url }}" alt="{{ morocco_tours_page.service_title1 }}">
+                        <p>{{ morocco_tours_page.service_title1 }}</p>
+                    </div>
+                    <div class="service-item">
+                        <img src="{{ morocco_tours_page.service_image2.url }}" alt="{{ morocco_tours_page.service_title2 }}">
+                        <p>{{ morocco_tours_page.service_title2 }}</p>
+                    </div>
+                    <div class="service-item">
+                        <img src="{{ morocco_tours_page.service_image3.url }}" alt="{{ morocco_tours_page.service_title3 }}">
+                        <p>{{ morocco_tours_page.service_title3 }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="MoroccoTours">
+        <div class="container">
+            <h2 class="title">{{ morocco_tours_page.tours_section_title }}</h2>
+            <div class="tours">
+                {% for tour in tours %}
+                    <a href="{% url 'tour-detail' tour.slug %}" class="tour-card">
+                        <div class="imageTour">
+                            <img src="{{ tour.small_image.url }}" alt="{{ tour.name }}">
+                        </div>
+                        <div class="tourInfo">
+                            <h3>{{ tour.name }}</h3>
+                            <p class="days"><i class="far fa-clock"></i> {{ tour.duration_days }} Days</p>
+                            <p class="description">{{ tour.description|truncatewords:30 }}</p>
+                        </div>
+                    </a>
+                {% empty %}
+                    <p>No tours available at the moment.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="textImageFlex">
+        <div class="container">
+            <div class="full">
+                <div class="textContent">
+                    <h2 class="title">{{ morocco_tours_page.why_choose_title }}</h2>
+                    {% for paragraph in morocco_tours_page.get_why_choose_paragraphs %}
+                        <p class="text">{{ paragraph }}</p>
+                    {% endfor %}
+                </div>
+                <div class="image">
+                    <img src="{{ morocco_tours_page.why_choose_image }}" alt="{{ morocco_tours_page.why_choose_title }}">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="ourStrength">
+        <div class="container">
+            <h2 class="title">{{ morocco_tours_page.strengths_title }}</h2>
+            <div class="strengths">
+                <div class="strength-item">
+                    <img src="{{ morocco_tours_page.strength_image1.url }}" alt="{{ morocco_tours_page.strength_title1 }}">
+                    <h5>{{ morocco_tours_page.strength_title1 }}</h5>
+                </div>
+                <div class="strength-item">
+                    <img src="{{ morocco_tours_page.strength_image2.url }}" alt="{{ morocco_tours_page.strength_title2 }}">
+                    <h5>{{ morocco_tours_page.strength_title2 }}</h5>
+                </div>
+                <div class="strength-item">
+                    <img src="{{ morocco_tours_page.strength_image3.url }}" alt="{{ morocco_tours_page.strength_title3 }}">
+                    <h5>{{ morocco_tours_page.strength_title3 }}</h5>
+                </div>
+                <div class="strength-item">
+                    <img src="{{ morocco_tours_page.strength_image4.url }}" alt="{{ morocco_tours_page.strength_title4 }}">
+                    <h5>{{ morocco_tours_page.strength_title4 }}</h5>
+                </div>
+                <div class="strength-item">
+                    <img src="{{ morocco_tours_page.strength_image5.url }}" alt="{{ morocco_tours_page.strength_title5 }}">
+                    <h5>{{ morocco_tours_page.strength_title5 }}</h5>
+                </div>
+                <div class="strength-item">
+                    <img src="{{ morocco_tours_page.strength_image6.url }}" alt="{{ morocco_tours_page.strength_title6 }}">
+                    <h5>{{ morocco_tours_page.strength_title6 }}</h5>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="textImageFlex">
+        <div class="container">
+            <div class="full full-reverse">
+                <div class="textContent">
+                    <h2 class="title no-center">{{ morocco_tours_page.steps_title }}</h2>
+                    <h4><p class="step">{{ morocco_tours_page.step1_title }}</p></h4>
+                    <p class="text">{{ morocco_tours_page.step1_description }}</p>
+                    <h4><p class="step">{{ morocco_tours_page.step2_title }}</p></h4>
+                    <p class="text">{{ morocco_tours_page.step2_description }}</p>
+                    <h4><p class="step">{{ morocco_tours_page.step3_title }}</p></h4>
+                    <p class="text">{{ morocco_tours_page.step3_description }}</p>
+                </div>
+                <div class="image">
+                    <img src="{{ morocco_tours_page.steps_image }}" alt="Dream Vacation">
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

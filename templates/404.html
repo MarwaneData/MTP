@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Page Not Found - Discover Morocco Tours{% endblock %}
+{% block meta_description %}The page you are looking for does not exist. Explore other amazing tours and content on Discover Morocco Tours.{% endblock %}
+{% block meta_keywords %}404, Page Not Found, Morocco Tours, Discover Morocco, Tourism in Morocco{% endblock %}
+{% block meta_author %}Discover Morocco Tours{% endblock %}
+{% block og_title %}Page Not Found - Discover Morocco Tours{% endblock %}
+{% block og_description %}The page you are looking for does not exist. Explore other amazing tours and content on Discover Morocco Tours.{% endblock %}
+{% block twitter_title %}Page Not Found - Discover Morocco Tours{% endblock %}
+{% block twitter_description %}The page you are looking for does not exist. Explore other amazing tours and content on Discover Morocco Tours.{% endblock %}
+{% block canonical_url %}{{ request.build_absolute_uri }}{% endblock %}
+{% block moreStyles %}
+<style>
+    .container2 {
+        max-width: 800px;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 3rem;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .container2::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 8px;
+        background: linear-gradient(90deg, #c94b4b, #4b134f);
+    }
+
+    .error-code {
+        font-size: 120px;
+        font-weight: bold;
+        color: #c94b4b;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1rem;
+    }
+
+    .error-text {
+        font-size: 24px;
+        margin-bottom: 2rem;
+        color: #4a5568;
+    }
+
+    .message {
+        font-size: 18px;
+        margin-bottom: 2.5rem;
+        color: #718096;
+        line-height: 1.6;
+    }
+
+    .nav-links {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .nav-link {
+        display: inline-block;
+        padding: 12px 24px;
+        background: linear-gradient(135deg, #c94b4b, #4b134f);
+        color: white;
+        text-decoration: none;
+        border-radius: 50px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        font-weight: 500;
+    }
+
+    .nav-link:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(201, 75, 75, 0.3);
+    }
+
+    .moroccan-pattern {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 60px;
+        background-image: repeating-linear-gradient(
+            45deg,
+            rgba(201, 75, 75, 0.1) 0px,
+            rgba(201, 75, 75, 0.1) 20px,
+            transparent 20px,
+            transparent 40px
+        );
+        opacity: 0.5;
+    }
+
+    @media (max-width: 600px) {
+        .error-code {
+            font-size: 80px;
+        }
+        
+        .error-text {
+            font-size: 20px;
+        }
+        
+        .message {
+            font-size: 16px;
+        }
+        
+        .container2 {
+            padding: 2rem;
+        }
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+<main>
+    <section style="display: flex; justify-content: center; align-items: center;">
+        <div class="container2">
+            <div class="error-code">404</div>
+            <h1 class="error-text">Oops! You've Wandered</h1>
+            <p class="message">
+                The page you're looking for seems to have disappeared. 
+                But don't worry - let us guide you back to the magical wonders of Morocco!
+            </p>
+            <div class="nav-links">
+                <a href="{% url 'index' %}" class="nav-link">Home</a>
+                <a href="{% url 'morocco-tours' %}" class="nav-link">Morocco Tours</a>
+                <a href="{% url 'gallery' %}" class="nav-link">Photo Gallery</a>
+                <a href="{% url 'contact' %}" class="nav-link">Contact Us</a>
+            </div>
+            <div class="moroccan-pattern"></div>
+        </div>
+    </section>
+</main>
+{% endblock %}

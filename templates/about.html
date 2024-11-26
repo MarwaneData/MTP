@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ about_page.meta_title }}{% endblock %}
+{% block meta_description %}{{ about_page.meta_description }}{% endblock %}
+{% block meta_keywords %}{{ about_page.meta_keywords }}{% endblock %}
+{% block meta_author %}{{ about_page.meta_title }}{% endblock %}
+{% block og_title %}{{ about_page.meta_title }}{% endblock %}
+{% block og_description %}{{ about_page.meta_description }}{% endblock %}
+{% block og_image %}{{ about_page.hero_image.url }}{% endblock %}
+{% block twitter_title %}{{ about_page.meta_title }}{% endblock %}
+{% block twitter_description %}{{ about_page.meta_description }}{% endblock %}
+{% block twitter_image %}{{ about_page.hero_image.url }}{% endblock %}
+{% block canonical_url %}{{ request.build_absolute_uri }}{% endblock %}
+
+{% block style %}{% static 'css/about.css' %}{% endblock %}
+{% block moreStyles %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+<link rel="stylesheet" href="{% static 'css/swipper.css' %}" />
+<link rel="stylesheet" href="{% static 'css/textImage.css' %}" />
+<link rel="stylesheet" href="{% static 'css/testimonials.css' %}" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+{% endblock %}
+
+{% block content %}
+<main>
+    <section class="hero" style="background-image: url('{{ about_page.hero_image.url }}');">
+        <div class="container">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h1>{{ about_page.hero_title }}</h1>
+                    <p>{{ about_page.hero_paragraph }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="About-vedio">
+        <div class="container">
+            <div class="tour-section">
+                <div class="tour-content">
+                    <h2>{{ about_page.video_section_title }}</h2>
+                    <p>{{ about_page.video_section_description }}</p>
+                </div>
+                <div class="tour-video">
+                    <iframe src="{{ about_page.video_url }}" title="YouTube video" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="textImageFlex">
+        <div class="container">
+            <div class="full">
+                <div class="textContent">
+                    <h2 class="title">{{ about_page.first_section_title }}</h2>
+                    {% for line in about_page.get_first_section_text_lines %}
+                        <p class="text">{{ line }}</p>
+                    {% endfor %}
+                </div>
+                <div class="image">
+                    <img src="{{ about_page.first_section_image.url }}" alt="{{ about_page.first_section_title }}">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="services">
+        <div class="container">
+            <h2 class="title">{{ about_page.services_title }}</h2>
+            <div class="row">
+                <div class="column">
+                  <div class="card">
+                    <div class="cover item-c" style="background-image: url({{ about_page.service_image1.url }});">
+                        <h3>{{ about_page.service_title1 }}</h1>
+                        <div class="card-back">
+                          <p>{{ about_page.service_description1 }}</p>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="card">
+                    <div class="cover item-c" style="background-image: url({{ about_page.service_image2.url }});">
+                        <h3>{{ about_page.service_title2 }}</h1>
+                        <div class="card-back">
+                          <p>{{ about_page.service_description2 }}</p>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="card">
+                    <div class="cover item-c" style="background-image: url({{ about_page.service_image3.url }});">
+                        <h3>{{ about_page.service_title3 }}</h1>
+                        <div class="card-back">
+                          <p>{{ about_page.service_description3 }}</p>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="textImageFlex">
+        <div class="container">
+            <div class="full full-reverse">
+                <div class="textContent">
+                    <h2 class="title">{{ about_page.client_care_title }}</h2>
+                    <p>{{ about_page.client_care_text }}</p>
+                </div>
+                <div class="image">
+                    <img src="{{ about_page.client_care_image.url }}" alt="{{ about_page.client_care_title }}">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="title">{{ about_page.testimonials_title }}</h2>
+            <div class="content-testimonials">
+                <figure class="snip1139">
+                    <blockquote>{{ about_page.testimonial1_content }}<div class="arrow"></div></blockquote>
+                    <img src="{{ about_page.testimonial1_image.url }}" alt="{{ about_page.testimonial1_name }}">
+                    <div class="author">
+                        <h5>{{ about_page.testimonial1_name }}<span>{{ about_page.testimonial1_source }}</span></h5>
+                    </div>
+                </figure>
+                <figure class="snip1139">
+                    <blockquote>{{ about_page.testimonial2_content }}<div class="arrow"></div></blockquote>
+                    <img src="{{ about_page.testimonial2_image.url }}" alt="{{ about_page.testimonial2_name }}">
+                    <div class="author">
+                        <h5>{{ about_page.testimonial2_name }}<span>{{ about_page.testimonial2_source }}</span></h5>
+                    </div>
+                </figure>
+                <figure class="snip1139">
+                    <blockquote>{{ about_page.testimonial3_content }}<div class="arrow"></div></blockquote>
+                    <img src="{{ about_page.testimonial3_image.url }}" alt="{{ about_page.testimonial3_name }}">
+                    <div class="author">
+                        <h5>{{ about_page.testimonial3_name }}<span>{{ about_page.testimonial3_source }}</span></h5>
+                    </div>
+                </figure>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
+
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="{% static 'js/swipper.js' %}"></script>
+{% endblock %}

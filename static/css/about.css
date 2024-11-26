@@ -1,0 +1,241 @@
+.hero h1{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 34px;
+    line-height: 66px;
+}
+.hero{
+    width: 100%;
+    height: 70vh;
+    background: no-repeat center center/cover;
+    text-align: center;
+    color: #FFFFFF;
+    min-height: 502px;
+    margin: 0 0 40px 0;
+    position: relative;
+}
+
+.hero p{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 66px;
+}
+
+.hero-section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 70vh;
+}
+.services{
+    margin: 0 0 40px; 
+}
+
+@media screen and (max-width: 700px){
+    .hero h1 {
+        font-size: 22px;
+        line-height: 38px;
+        margin: 0 0 15px 0;
+    }
+    .hero p {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 32px;
+        margin: 0 auto 20px;
+        max-width: 300px;
+    }
+
+}
+
+
+section .row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 20px;
+    margin: 0 auto;
+    justify-content: space-between;
+    width: 95%;
+}
+.column{
+    height: 300px;
+    }
+.card {
+height: 100%;
+  width: 100%;
+  position: relative;
+  width: 100%;
+  margin: 10px 0;
+  transition: ease all 1.3s;
+}
+.card:hover .cover {
+  transform: rotateX(0deg) rotateY(-180deg);
+}
+.card:hover .cover:before {
+  transform: translateZ(30px);
+}
+.card:hover .cover:after {
+  background-color: black;
+}
+.card:hover .cover h1 {
+  transform: translateZ(100px);
+}
+.card:hover .cover .price {
+  transform: translateZ(60px);
+}
+.card:hover .cover a {
+  transform: translateZ(-60px) rotatey(-180deg);
+}
+.card .cover {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  transform-style: preserve-3d;
+  transition: ease all 1.3s;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.card .cover:before {
+  content: '';
+  position: absolute;
+  border: 5px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  z-index: 2;
+  transition: ease all 1s;
+  transform-style: preserve-3d;
+  transform: translateZ(0px);
+}
+
+.card .cover:after {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 2;
+  transition: ease all 1s;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.card .cover h3 {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  color: white;
+  transform-style: preserve-3d;
+  transition: ease all 1s;
+  z-index: 3;
+  font-size: 18px;
+  transform: translateZ(0px);
+}
+.card .card-back {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: #ffffff;
+  transform-style: preserve-3d;
+  transition: ease all 1s;
+  transform: translateZ(-1px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card .card-back p {
+  transform-style: preserve-3d;
+  transition: ease transform 1s, ease background 0.3s;
+  transform: translateZ(-1px) rotatey(-180deg);
+  background: transparent;
+  font-weight: 400;
+  font-size: 14px;
+  padding: 14px 20px;
+  outline: none;
+  text-decoration: none;
+}
+.card .card-back a:hover {
+  background-color: white;
+  color: #0b0f08;
+}
+
+
+
+.tour-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  border-radius: 10px;
+  max-width: 100%;
+  margin: 20px auto;
+}
+
+.tour-content {
+  flex: 1;
+  padding-right: 30px;
+  border-right: 1px solid #ddd;
+  text-align: justify;
+}
+
+.tour-video {
+  flex: 1;
+  padding-left: 30px;
+}
+
+.tour-video iframe {
+  width: 100%;
+  height: 300px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.tour-section h2 {
+  font-size: 30px;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+.tour-section p {
+  color: #555;
+}
+
+@media (max-width: 768px) {
+  .tour-section {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+  }
+
+  .tour-content, .tour-video {
+      padding: 0;
+      margin-bottom: 20px;
+      border-right: none;
+      border-bottom: 1px solid #ddd;
+  }
+
+  .tour-video {
+      border-bottom: none;
+  }
+  .tour-video iframe {
+      height: 250px;
+      width: 100%;
+  }
+  .tour-section p {
+    text-align: center;
+    margin: 0 0 15px 0;
+  }
+  .tour-section h2 {
+    font-size: 18px;
+    text-align: center;
+  }
+  
+}
