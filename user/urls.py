@@ -19,6 +19,5 @@ urlpatterns = [
     path('contact_email3', views.contact_email_tour, name='contact_email_tour'),
     path('contact_email4', views.contact_email_trip, name='contact_email_trip'),
     path('sitemap.xml', views.manual_sitemap, name='manual_sitemap'),
-        path("robots.txt", views.robots_txt, name="robots_txt"),
-
+    path("robots.txt", views.robots_txt, name="robots_txt"),
 ]

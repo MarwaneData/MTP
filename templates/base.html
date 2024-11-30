@@ -45,22 +45,60 @@
                         <img class="closebtn" src="{% static 'images/close icon.png' %}" alt="">
                     </div>
                     <ul>
-                        <li><a href="{% url 'index' %}" class=""><img src="{% static 'images/home icon.png' %}"
+                        <li><a href="{% url 'index' %}" class=""   
+                            data-normal="{% static 'images/home icon.png' %}" 
+                            data-active="{% static 'images/home icon active.png' %} "> 
+                            <img src="{% static 'images/home icon.png' %}"
                                     alt="Home Link">Home</a></li>
-                        <li><a href="{% url 'morocco-tours' %}"><img src="{% static 'images/morocco-tours icon.png' %}"
-                                    alt="Morocco Links">Morocco Desert Tours</a></li>
-                        <li><a href="{% url 'day-trips' %}"><img src="{% static 'images/day-trips icon.png' %}"
-                                    alt="Icon 3"> Day Trips</a></li>
-                        <li><a href="{% url 'PhotoGrapher-tours' %}"><img
-                                    src="{% static 'images/photography icon.png' %}" alt="Icon 4"> Photography</a></li>
-                        <li><a href="{% url 'DesertCamp' %}"><img src="{% static 'images/luxury icon.png' %}"
-                                    alt="Icon 4"> Luxury Desert camp</a></li>
-                        <li><a href="{% url 'about' %}"><img src="{% static 'images/about icon.png' %}" alt="Icon 4">
-                                About</a></li>
-                        <li><a href="{% url 'gallery' %}"><img src="{% static 'images/gallery icon.png' %}"
-                                    alt="Icon 4"> Gallery</a></li>
-                        <li><a href="{% url 'blogs' %}"><img src="{% static 'images/blog icon.png' %}" alt="Icon 4">
-                                Blog</a></li>
+                                    <li>
+                                        <a href="{% url 'morocco-tours' %}" 
+                                           data-normal="{% static 'images/morocco-tours icon.png' %}" 
+                                           data-active="{% static 'images/morocco-tours icon active.png' %}">
+                                            <img src="{% static 'images/morocco-tours icon.png' %}" alt="Morocco Links"> Morocco Desert Tours
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'day-trips' %}" 
+                                           data-normal="{% static 'images/day-trips icon.png' %}" 
+                                           data-active="{% static 'images/day-trips icon active.png' %}">
+                                            <img src="{% static 'images/day-trips icon.png' %}" alt="Icon 3"> Day Trips
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'PhotoGrapher-tours' %}" 
+                                           data-normal="{% static 'images/photography icon.png' %}" 
+                                           data-active="{% static 'images/photography icon active.png' %}">
+                                            <img src="{% static 'images/photography icon.png' %}" alt="Icon 4"> Photography
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'DesertCamp' %}" 
+                                           data-normal="{% static 'images/luxury icon.png' %}" 
+                                           data-active="{% static 'images/luxury icon active.png' %}">
+                                            <img src="{% static 'images/luxury icon.png' %}" alt="Icon 4"> Luxury Desert Camp
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'about' %}" 
+                                           data-normal="{% static 'images/about icon.png' %}" 
+                                           data-active="{% static 'images/about icon active.png' %}">
+                                            <img src="{% static 'images/about icon.png' %}" alt="Icon 4"> About
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'gallery' %}" 
+                                           data-normal="{% static 'images/gallery icon.png' %}" 
+                                           data-active="{% static 'images/gallery icon active.png' %}">
+                                            <img src="{% static 'images/gallery icon.png' %}" alt="Icon 4"> Gallery
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'blogs' %}" 
+                                           data-normal="{% static 'images/blog icon.png' %}" 
+                                           data-active="{% static 'images/blog icon active.png' %}">
+                                            <img src="{% static 'images/blog icon.png' %}" alt="Icon 4"> Blog
+                                        </a>
+                                    </li>                                    
                         <a class="secondcontact" href="{% url 'contact' %}">
                             <div>
                                 <button class="btn"><i class="animation"></i>Contact<i class="animation"></i></button>
@@ -276,25 +314,31 @@
 });
 
 
-        document.addEventListener("DOMContentLoaded", function () {
-            var currentUrl = window.location.pathname;
-            var navLinks = document.querySelectorAll(".nav ul li a");
+document.addEventListener("DOMContentLoaded", function () {
+    var currentUrl = window.location.pathname;
+    var navLinks = document.querySelectorAll(".nav ul li a");
 
-            navLinks.forEach(function (link) {
-                // Check if the link's href matches the current URL
-                if (link.getAttribute("href") === currentUrl) {
-                    link.classList.add("activelink");
+    navLinks.forEach(function (link) {
+        // Check if the link's href matches the current URL
+        if (link.getAttribute("href") === currentUrl) {
+            link.classList.add("activelink");
 
-                    // Change the image source to the active version if applicable
-                    var img = link.querySelector("img");
-                    if (img) {
-                        var activeImgSrc = img.src.replace(".png", " active.png");
-                        img.src = activeImgSrc;
-                    }
-                }
-            });
-        });
-
+            // Change the image source to the active version
+            var img = link.querySelector("img");
+            if (img) {
+                var activeImgSrc = link.getAttribute("data-active");
+                img.src = activeImgSrc;
+            }
+        } else {
+            // Reset to the normal image for non-active links
+            var img = link.querySelector("img");
+            if (img) {
+                var normalImgSrc = link.getAttribute("data-normal");
+                img.src = normalImgSrc;
+            }
+        }
+    });
+});
         var burder = document.querySelector(".burger");
         var nav = document.querySelector(".nav");
         var closebtn = document.querySelector(".closebtn");
