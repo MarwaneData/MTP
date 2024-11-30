@@ -15,7 +15,7 @@ SECRET_KEY = secret_key = os.environ.get("SECRET_KEY", '')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["morocco-tours-photographer.com", "www.morocco-tours-photographer.com", 'localhost']
+ALLOWED_HOSTS = ["morocco-tours-photographer.com", "www.morocco-tours-photographer.com", '167.99.138.89']
 # Application definition
 
 INSTALLED_APPS = [
