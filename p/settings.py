@@ -15,7 +15,7 @@ SECRET_KEY = secret_key = os.environ.get("SECRET_KEY", '')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["morocco-tours-photographer.com", "www.morocco-tours-photographer.com", '167.99.138.89']
+ALLOWED_HOSTS = ["167.99.138.89","morocco-tours-photographer.com", "www.morocco-tours-photographer.com"]
 # Application definition
 
 INSTALLED_APPS = [
@@ -70,8 +70,8 @@ DATABASES = {
         'NAME': 'myproject',
         'USER': 'myprojectuser',
         'PASSWORD': os.environ.get('DB_PASSWORD', ''),
-        'HOST': os.environ.get('DB_HOST', '127.0.0.1'),
-        'PORT': os.environ.get('DB_PORT', '5432'), 
+        'HOST':  'localhost',
+        'PORT': '', 
     }
 }
 # Password validation
