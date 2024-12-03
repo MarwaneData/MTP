@@ -6,10 +6,10 @@
 {% block meta_author %}Morocco Tours Photographers{% endblock %}
 {% block og_title %}{{homepage.meta_title}}{% endblock %}
 {% block og_description %}{{homepage.meta_description}}{% endblock %}
-{% block og_image %}{{homepage.hero_image}}{% endblock %}
+{% block og_image %}/media/{{homepage.hero_image}}{% endblock %}
 {% block twitter_title %}{{homepage.meta_title}}{% endblock %}
 {% block twitter_description %}{{homepage.meta_description}}{% endblock %}
-{% block twitter_image %}{{homepage.hero_image}}{% endblock %}
+{% block twitter_image %}/media/{{homepage.hero_image}}{% endblock %}
 {% block canonical_url %}{{ request.build_absolute_uri }}{% endblock %}
 {% block style %}{% static 'css/index.css' %}{% endblock %}
 {% block seometa %}
@@ -19,7 +19,7 @@
       "@type": "TouristAttraction",
       "name": "{{homepage.meta_title}}",
       "description": "{{homepage.meta_description}}",
-      "image": "{{ request.scheme }}://{{ request.get_host }}{{ homepage.hero_image.url }}",
+      "image": "{{ request.scheme }}://{{ request.get_host }}/media/{{ homepage.hero_image.url }}",
       "touristType": "Adventure Travel",
       "location": {
         "@type": "Place",
@@ -48,7 +48,7 @@
               "description": "{{ tour.description }}",
               "touristType": "Adventure Travel",
               "duration": "P{{ tour.duration_days }}D",
-              "image": "{{ tour.small_image.url }}",
+              "image": "/media/{{ tour.small_image.url }}",
               "offers": {
                 "@type": "Offer",
                 "price": "{{ tour.price }}",
@@ -234,7 +234,7 @@
                     {% endfor %}
                 </div>
                 <div class="image">
-                    <img src="{{homepage.about_image.url}}" alt="{{homepage.about_title}}">
+                    <img src="/media/{{homepage.about_image.url}}" alt="{{homepage.about_title}}">
                 </div>
             </div>
         </div>
@@ -250,7 +250,7 @@
                         {% for tour in tours %}
                         <a href="{% url 'tour-detail' tour.slug %}" class="tour-card swiper-slide">
                             <div class="imageTour">
-                                <img src="{{ tour.small_image }}" alt="{{ tour.name }}">
+                                <img src="/media/{{ tour.small_image }}" alt="{{ tour.name }}">
                             </div>
                             <div class="tourInfo">
                                 <h3>{{ tour.name }}</h3>
@@ -280,7 +280,7 @@
                     {% for excursion in excursions %}
                         <a href="{% url 'daytrip-detail' excursion.slug %}" class="tour-card swiper-slide">
                             <div class="imageTour">
-                                <img src="{{ excursion.small_image }}" alt="{{ excursion.name }}">
+                                <img src="/media/{{ excursion.small_image }}" alt="{{ excursion.name }}">
                             </div>
                             <div class="tourInfo">
                                 <h3>{{ excursion.name }}</h3>
@@ -368,7 +368,7 @@
                     </div>
                 </div>
                 <div class="image">
-                    <img src="{{homepage.comfort_image.url}}" alt="{{homepage.comfort_title}}">
+                    <img src="/media/{{homepage.comfort_image.url}}" alt="{{homepage.comfort_title}}">
                 </div>
             </div>
         </div>
