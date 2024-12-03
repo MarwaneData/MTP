@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv()
 SECRET_KEY = secret_key = os.environ.get("SECRET_KEY", '') 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["157.230.25.155","morocco-tours-photographer.com", "www.morocco-tours-photographer.com"]
 # Application definition
