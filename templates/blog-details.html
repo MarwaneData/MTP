@@ -30,7 +30,7 @@
         </header>
   
         <div class="blog-content">
-            <img src="{{ blog.small_image.url }}" alt="Blog Hero Image" class="blog-image1">
+            <img src="{{ blog.hero_image.url }}" alt="Blog Hero Image" class="blog-image1">
             
             {% for block in blog.content_blocks.all %}
                 <section class="content-block">
@@ -73,7 +73,7 @@
             <div class="blog-grid">
                 {% for related in related_blogs %}
                 <article class="blog-card">
-                    <img src="{{ related.hero_image.url }}" alt="{{ related.blog_title }}" class="blog-image">
+                    <img src="{{ related.small_image.url }}" alt="{{ related.blog_title }}" class="blog-image">
                     <div class="blog-content">
                         <span class="blog-category">{{ related.category }}</span>
                         <h3 class="blog-title2">{{ related.blog_title }}</h3>
