@@ -295,7 +295,7 @@ class BlogAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('meta_title', 'meta_description', 'meta_keywords', 'blog_title', 'posted_date', 'view_count', 'author_name', 'hero_image', 'slug', 'category')
+            'fields': ('meta_title', 'meta_description', 'meta_keywords', 'blog_title', 'posted_date', 'view_count', 'author_name', 'hero_image','small_image','slug', 'category')
         }),
         ('Related Content', {
             'fields': ('related_title', 'related_paragraph', 'button_text', 'button_link')
