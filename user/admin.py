@@ -282,12 +282,10 @@ class GalleryPageAdmin(admin.ModelAdmin):
         }),
     )
     inlines = [GalleryImageInline]
-
-
 class BlogContentBlockInline(admin.StackedInline):
     model = BlogContentBlock
-    extra = 1  # Number of empty content blocks shown by default
-    fields = ('title', 'text_content', 'image_content', 'alt_text')  # Fields to display
+    extra = 1  
+    fields = ('title', 'text_content', 'image_content', 'alt_text')  
 
 
 class BlogAdmin(admin.ModelAdmin):
@@ -303,7 +301,7 @@ class BlogAdmin(admin.ModelAdmin):
             'fields': ('related_title', 'related_paragraph', 'button_text', 'button_link')
         }),
     )
-
+    inlines = [BlogContentBlockInline]
 admin.site.register(Blog, BlogAdmin)
 
 @admin.register(BlogPage)
