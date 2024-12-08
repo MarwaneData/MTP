@@ -488,6 +488,7 @@ class Blog(models.Model):
     view_count = models.PositiveIntegerField(default=300)
     author_name = models.CharField(max_length=255, default="By Mohammed")
     hero_image = models.ImageField(upload_to='blogs/', default='default_hero.jpg')
+    small_image = models.ImageField(upload_to='blogs/', null=True, blank=True, help_text="Size 296x370")
     slug = models.SlugField(unique=True, blank=True)
     category = models.CharField(max_length=255, default="Write a category of your blog")
     related_title = models.CharField(max_length=255, default="Related Tour Title marketing")
