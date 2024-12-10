@@ -53,7 +53,7 @@
                 "@type": "Offer",
                 "price": "{{ tour.price }}",
                 "priceCurrency": "USD",
-                "url": "{{ request.build_absolute_uri }}{% url 'tour-detail' tour.slug %}"
+                "url": "{{ request.build_absolute_uri|slice:':-1'}}{% url 'tour-detail' tour.slug %}"
               }
             }
           }{% if not forloop.last %},{% endif %}
@@ -100,43 +100,43 @@
               "@type": "ListItem",
               "position": 2,
               "name": "Morocco Desert Tours",
-              "item": "{{ request.build_absolute_uri }}{% url 'morocco-tours' %}"
+              "item": "{{ request.build_absolute_uri|slice:':-1'}}{% url 'morocco-tours' %}"
             },
             {
               "@type": "ListItem",
               "position": 3,
               "name": "Day Trips",
-              "item": "{{ request.build_absolute_uri }}{% url 'day-trips' %}"
+              "item": "{{ request.build_absolute_uri|slice:':-1'}}{% url 'day-trips' %}"
             },
             {
               "@type": "ListItem",
               "position": 4,
               "name": "Photography Tours",
-              "item": "{{ request.build_absolute_uri }}{% url 'PhotoGrapher-tours' %}"
+              "item": "{{ request.build_absolute_uri|slice:':-1'}}{% url 'PhotoGrapher-tours' %}"
             },
             {
               "@type": "ListItem",
               "position": 5,
               "name": "Luxury Desert Camp",
-              "item": "{{ request.build_absolute_uri }}{% url 'DesertCamp' %}"
+              "item": "{{ request.build_absolute_uri|slice:':-1'}}{% url 'DesertCamp' %}"
             },
             {
               "@type": "ListItem",
               "position": 6,
               "name": "About",
-              "item": "{{ request.build_absolute_uri }}{% url 'about' %}"
+              "item": "{{ request.build_absolute_uri|slice:':-1'}}{% url 'about' %}"
             },
             {
               "@type": "ListItem",
               "position": 7,
               "name": "Gallery",
-              "item": "{{ request.build_absolute_uri }}{% url 'gallery' %}"
+              "item": "{{ request.build_absolute_uri|slice:':-1'}}{% url 'gallery' %}"
             },
             {
               "@type": "ListItem",
               "position": 8,
               "name": "Blog",
-              "item": "{{ request.build_absolute_uri }}{% url 'blogs' %}"
+              "item": "{{ request.build_absolute_uri|slice:':-1'}}{% url 'blogs' %}"
             }
           ]
         }
