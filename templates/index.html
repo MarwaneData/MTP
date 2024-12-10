@@ -48,7 +48,7 @@
               "description": "{{ tour.description }}",
               "touristType": "Adventure Travel",
               "duration": "P{{ tour.duration_days }}D",
-              "image": "{{ tour.small_image.url }}",
+              "image": "{{ request.build_absolute_uri|slice:':-1'}}{{ tour.small_image.url }}",
               "offers": {
                 "@type": "Offer",
                 "price": "{{ tour.price }}",
@@ -94,13 +94,13 @@
               "@type": "ListItem",
               "position": 1,
               "name": "Home",
-              "item": "{{ request.build_absolute_uri|slice:':-1' }}{{ request.build_absolute_uri }}"
+              "item": "{{ request.build_absolute_uri|slice:':-1'}}{{ request.build_absolute_uri }}"
             },
             {
               "@type": "ListItem",
               "position": 2,
               "name": "Morocco Desert Tours",
-              "item": "{{ request.build_absolute_uri|slice:':-1' }}{{ request.build_absolute_uri|slice:':-1'}}{% url 'morocco-tours' %}"
+              "item": "{{ request.build_absolute_uri|slice:':-1'}}{{ request.build_absolute_uri|slice:':-1'}}{% url 'morocco-tours' %}"
             },
             {
               "@type": "ListItem",
@@ -117,7 +117,7 @@
             {
               "@type": "ListItem",
               "position": 5,
-              "name": "Luxury Desert Camp",
+              "name": "Luxury Desert Camp {{ request.build_absolute_uri|slice:':-1'}}",
               "item": "{{ request.build_absolute_uri|slice:':-1'}}{% url 'DesertCamp' %}"
             },
             {
