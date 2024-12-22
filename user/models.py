@@ -52,7 +52,7 @@ class Tour(models.Model):
     def get_information_list(self):
         return self.important_Information.splitlines() 
     def get_Accommodations_list(self):
-        return self.important_Information.splitlines() 
+        return self.List_Of_Accommodations.splitlines() 
 
 class DayDetail(models.Model):
     tour = models.ForeignKey(Tour, related_name="days", on_delete=models.CASCADE)
