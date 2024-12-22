@@ -3,7 +3,7 @@ from .models import *
 from .models import MoroccoToursPage
 
 class TourAdmin(admin.ModelAdmin):
-    list_display = ('name', 'prices', 'departure_city', 'duration_days', 'created_at', 'updated_at')
+    list_display = ('name', 'prices','important_Information', 'departure_city', 'duration_days', 'created_at', 'updated_at')
     search_fields = ('name', 'departure_city', 'end_city')
     list_filter = ('updated_at', 'created_at')
     prepopulated_fields = {'slug': ('name',)}
