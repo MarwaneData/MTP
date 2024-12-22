@@ -47,6 +47,8 @@ class Tour(models.Model):
         return self.prices.splitlines()
     def get_briefly_points_list(self):
         return self.briefly_points.splitlines() 
+    def get_information_list(self):
+        return self.important_Information.splitlines() 
 
 class DayDetail(models.Model):
     tour = models.ForeignKey(Tour, related_name="days", on_delete=models.CASCADE)
