@@ -81,6 +81,12 @@
                                     <li><i class="fas fa-money-bill-wave" style="color: rgb(243, 182, 28);"></i> {{ item }}</li>
                                 {% endfor %}
                             </ul>
+                            <h3 class="TourtitleInfo">Best Prices</h3>
+                            <ul class="included">
+                                {% for item in tour.get_information_list %}
+                                    <li><i class="far fa-dot-circle" style="color: rgb(183 183 183);"></i> {{ item }}</li>
+                                {% endfor %}
+                            </ul>
                         </div>
             
                         <!-- Details Tab (Dynamic Days) -->
