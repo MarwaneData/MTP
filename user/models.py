@@ -14,6 +14,7 @@ class Tour(models.Model):
     departure_city = models.CharField(max_length=100, help_text="Departure city")
     end_city = models.CharField(max_length=100, help_text="End city")
     prices = models.TextField(help_text="Please each price on a new line.", blank=True, null=True)
+    important_Information = models.TextField(help_text="Please each Information on a new line.", blank=True, null=True)
     duration_days = models.IntegerField(help_text="Number of days of the tour")
     highlights = models.TextField(help_text="Please each highlight on a new line.")
     included = models.TextField(blank=True, null=True, help_text="Please each included item on a new line.")
