@@ -75,6 +75,15 @@
                                     <li><i class="fas fa-ban" style="color: brown;"></i> {{ item }}</li>
                                 {% endfor %}    
                             </ul>
+                            <h3 class="TourtitleInfo">Your Accommodations</h3>
+                            <ul class="included" style="list-style-type: disc; padding-left: 20px;">
+                                {% for item in tour.get_information_list %}
+                                    <li style="font-size: 1rem; margin: 5px 0; color: black;">
+                                        {{ item }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+
                             <h3 class="TourtitleInfo">Best Prices</h3>
                             <ul class="included">
                                 {% for item in tour.get_prices %}
