@@ -13,6 +13,8 @@ class Tour(models.Model):
     description = models.TextField(help_text="Marketing Tour Description")
     departure_city = models.CharField(max_length=100, help_text="Departure city")
     end_city = models.CharField(max_length=100, help_text="End city")
+    Accommodations_Sentence = models.TextField(help_text="Your Sentence Accommodations", blank=True, null=True, default="Here are the accommodation options, ranging from excellent 4-star hotels to luxurious 5-star stays. Please note that bookings are made based on availability, and prices may vary depending on your exact travel dates.")
+    List_Of_Accommodations = models.TextField(help_text="Each Accommodations In one Line", blank=True, null=True)
     prices = models.TextField(help_text="Please each price on a new line.", blank=True, null=True)
     important_Information = models.TextField(help_text="Please each Information on a new line.", blank=True, null=True)
     duration_days = models.IntegerField(help_text="Number of days of the tour")
@@ -48,6 +50,8 @@ class Tour(models.Model):
     def get_briefly_points_list(self):
         return self.briefly_points.splitlines() 
     def get_information_list(self):
+        return self.important_Information.splitlines() 
+    def get_Accommodations_list(self):
         return self.important_Information.splitlines() 
 
 class DayDetail(models.Model):
