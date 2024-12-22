@@ -376,7 +376,7 @@ class PhotographerTourPage(models.Model):
 class Package(models.Model):
     photographer_tour_page = models.ForeignKey(PhotographerTourPage, related_name='packages', on_delete=models.CASCADE, help_text="Choose photography page")
     title = models.CharField(max_length=100, help_text="Title of the Package")
-    image = models.ImageField(upload_to='packages/', help_text="Small image for package Photographer")
+    image = models.ImageField(upload_to='packages/', help_text="Small image for package Photographer", blank=True, null=True)
     old_price = models.PositiveIntegerField(help_text="Old price of the Package")
     current_price = models.PositiveIntegerField(help_text="Current price of the Package")  
     duration = models.CharField(max_length=50, help_text="Duration of the Package, like 2h")
