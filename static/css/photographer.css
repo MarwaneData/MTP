@@ -266,7 +266,8 @@ a{
     font-weight: bold;
 }
 .pricing-header {
-    background-color: #1f2626;
+    background-position:center;
+    background-size:cover;
     color: white;
     padding: 20px;
     text-align: center;
