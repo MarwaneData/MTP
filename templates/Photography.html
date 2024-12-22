@@ -155,7 +155,7 @@
                 {% for package in packages %}
                 <div class="pricing-card">
                     <div class="discount-banner">{{ package.discount_percentage }}% OFF</div>
-                    <div class="pricing-header">
+                    <div class="pricing-header" style="background-image:url({{ package.image.url}})">
                         <h3 class="pricing-title">{{ package.title }}</h3>
                         <p class="pricing-price">
                             <span class="original-price">€ {{ package.old_price }}</span><br>
