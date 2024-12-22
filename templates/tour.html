@@ -76,6 +76,7 @@
                                 {% endfor %}    
                             </ul>
                             <h3 class="TourtitleInfo">Your Accommodations</h3>
+                            <p class="description">{{ tour.Accommodations_Sentence }}</p>
                             <ul class="included" style="list-style-type: disc; padding-left: 20px;">
                                 {% for item in tour.get_Accommodations_list %}
                                     <li style="font-size: 1rem; margin: 5px 0; color: black;">
