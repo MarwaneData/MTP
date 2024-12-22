@@ -79,11 +79,12 @@
                             <p style="margin: 0 0 12px 0;">{{ tour.Accommodations_Sentence }}</p>
                             <ul class="included" style="list-style-type: disc; padding-left: 20px; margin: 0;">
                                 {% for item in tour.get_Accommodations_list %}
-                                    <li style="font-size: 1rem; margin: 5px 0; color: black;">
+                                    <li style="font-size: 1rem; margin: 5px 0; color: black; display: list-item;">
                                         {{ item }}
                                     </li>
                                 {% endfor %}
                             </ul>
+
 
                             <h3 class="TourtitleInfo">Best Prices</h3>
                             <ul class="included">
