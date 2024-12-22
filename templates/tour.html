@@ -76,12 +76,10 @@
                                 {% endfor %}    
                             </ul>
                             <h3 class="TourtitleInfo">Your Accommodations</h3>
-                            <p style="margin: 0 0 12px 0;">{{ tour.Accommodations_Sentence }}</p>
-                            <ul class="included" style="list-style-type: disc; padding-left: 20px; margin: 0;">
+                            <p style="margin: 0 0 4px 0;">{{ tour.Accommodations_Sentence }}</p>
+                            <ul>
                                 {% for item in tour.get_Accommodations_list %}
-                                    <li style="font-size: 1rem; margin: 5px 0; color: black; display: list-item;">
-                                        {{ item }}
-                                    </li>
+                                    <li>&#9679; {{ item }}</li> <!-- &#9679; is a large bullet symbol (●) -->
                                 {% endfor %}
                             </ul>
 
