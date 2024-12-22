@@ -161,6 +161,7 @@ class PackageInline(admin.StackedInline):
         (None, {
             'fields': (
                 'title',
+                'image',
                 'old_price',
                 'current_price',
                 'duration',
