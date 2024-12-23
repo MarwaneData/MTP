@@ -116,7 +116,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 <link rel="stylesheet" href="{% static 'css/textImage.css' %}" />
 <link rel="stylesheet" href="{% static 'css/swipper.css' %}" />
-<link rel="stylesheet" href="{% static 'css/index.css' %}" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 {% endblock %}
 
@@ -161,6 +160,18 @@
             <div class="container swiper">
                 <div class="slider-wrapper">
                     <div class="Tour-list swiper-wrapper">
+                        {% for excursion in best_daytrips %}
+                        <a href="{% url 'daytrip-detail' excursion.slug %}" class="tour-card swiper-slide">
+                            <div class="imageTour">
+                                <img src="{{ excursion.small_image.url }}" alt="{{ excursion.name }}">
+                            </div>
+                            <div class="tourInfo">
+                                <h3>{{ excursion.name }}</h3>
+                                <p class="days"><i class="far fa-clock"></i> {{ excursion.duration }} Days</p>
+                                <p class="description">{{ excursion.description|truncatewords:25 }}</p>
+                            </div>
+                        </a>
+                    {% endfor %}
                         {% for excursion in best_daytrips %}
                         <a href="{% url 'daytrip-detail' excursion.slug %}" class="tour-card swiper-slide">
                             <div class="imageTour">
