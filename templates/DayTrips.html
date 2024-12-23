@@ -153,24 +153,26 @@
         </div>
     </section>
 
-    {% if day_trips_page.show_best_day_trips_section %}
-    <section class="privateTour">
+     {% if day_trips_page.show_best_day_trips_section %}
+    <section class="privateTour" id="goo"></section>
         <div class="container">
             <h2 class="title">{{ day_trips_page.best_day_trips_title }}</h2>
             <div class="container swiper">
                 <div class="slider-wrapper">
                     <div class="Tour-list swiper-wrapper">
-                        {% for daytrip in best_daytrips %}
-                        <a href="{% url 'daytrip-detail' daytrip.slug %}" class="tour-card swiper-slide">
+                        {% for excursion in best_daytrips %}
+                        <a href="{% url 'daytrip-detail' excursion.slug %}" class="tour-card swiper-slide">
                             <div class="imageTour">
-                                <img src="{{ daytrip.small_image.url }}" alt="{{ daytrip.name }}">
+                                <img src="{{ excursion.small_image.url }}" alt="{{ excursion.name }}">
                             </div>
                             <div class="tourInfo">
-                                <h3>{{ daytrip.name }}</h3>
-                                <p class="description">{{ daytrip.description|truncatewords:20 }}</p>
+                                <h3>{{ excursion.name }}</h3>
+                                <p class="days"><i class="far fa-clock"></i> {{ excursion.duration }} Days</p>
+                                <p class="description">{{ excursion.description|truncatewords:25 }}</p>
                             </div>
                         </a>
-                        {% endfor %}
+                    {% endfor %}
+                    
                     </div>
                     <div class="swiper-pagination"></div>
                     <div class="swiper-slide-button swiper-button-prev"></div>
