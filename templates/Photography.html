@@ -138,7 +138,7 @@
             <div class="full">
                 <div class="textContent">
                     <h2 class="title">{{ photographer_tour_page.section_title }}</h2>
-                    {% for paragraph in photographer_tour_page.get_destination_paragraphs2 %}
+                    {% for paragraph in photographer_tour_page.get_destination_paragraphs %}
                     <p class="text">{{ paragraph }}</p>
                     {% endfor %}
                 </div>
@@ -190,8 +190,8 @@
         <div class="container">
             <div class="full">
                 <div class="textContent">
-                    <h2 class="title">{{ photographer_tour_page.section_title }}</h2>
-                    {% for paragraph in photographer_tour_page.get_destination_paragraphs %}
+                    <h2 class="title">{{ photographer_tour_page.Second_section }}</h2>
+                    {% for paragraph in photographer_tour_page.get_destination_paragraphs2 %}
                     <p class="text">{{ paragraph }}</p>
                     {% endfor %}
                 </div>
